@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>Log in Page</title>
+</head>
+ 
+<body>
+    <div align="center" style="color: red">
+        <p id="message">{{signin_error}}</p>
+    </div>
+    <form id="signin" name="signin" method="post" action="signin" align = "center">
+        <label for="email">Email Address</label></br>
+        <input class="text" name="email" type="text" /></br>
+        <label for="password">Password</label></br>
+        <input name="password" type="password" /></br></br>
+        <input class="btn" type="submit" value="Sign In"/></br></br>
+    </form>
+    <div align="center">
+        <input type="button" value="Registration" onclick='location.href="./signup"'/>
+    </div>
+</body>
+ 
+</html>

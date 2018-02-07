@@ -1,0 +1,55 @@
+{
+    "development": {
+        "username": "slyscrat",
+        "password": "12345678",
+        "database": "slyscratDB",
+        "host": "slyscratdbinstance.ckwsrytwolno.us-east-2.rds.amazonaws.com",
+        "port": 5432,
+        "dialect": "postgres",
+        "operatorsAliases" : {
+            "$and": "Op.and",
+            "$or": "Op.or",
+            "$eq": "Op.eq",
+            "$gt": "Op.gt",
+            "$lt": "Op.lt",
+            "$lte": "Op.lte",
+            "$like": "Op.like"
+          }
+    },
+
+    "test": {
+        "username": "slyscrat",
+        "password": "12345678",
+        "database": "slyscratDB",
+        "host": "slyscratdbinstance.ckwsrytwolno.us-east-2.rds.amazonaws.com",
+        "port": 5432,
+        "dialect": "postgres",
+        "operatorsAliases" : {
+            "$and": "Op.and",
+            "$or": "Op.or",
+            "$eq": "Op.eq",
+            "$gt": "Op.gt",
+            "$lt": "Op.lt",
+            "$lte": "Op.lte",
+            "$like": "Op.like"
+          }
+    },
+ 
+    "production": {
+        "username": "slyscrat",
+        "password": "12345678",
+        "database": "slyscratDB",
+        "host": "slyscratdbinstance.ckwsrytwolno.us-east-2.rds.amazonaws.com",
+        "port": 5432,
+        "dialect": "postgres",
+        "operatorsAliases" : {
+            "$and": "Op.and",
+            "$or": "Op.or",
+            "$eq": "Op.eq",
+            "$gt": "Op.gt",
+            "$lt": "Op.lt",
+            "$lte": "Op.lte",
+            "$like": "Op.like"
+          }
+    }
+}

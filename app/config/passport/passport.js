@@ -1,0 +1,102 @@
+var bCrypt = require('bcrypt-nodejs');
+module.exports = function(passport, user, done){
+    var User = user;
+    var LocalStrategy = require('passport-local').Strategy;
+
+    passport.use('local-signup', new LocalStrategy(
+        {
+            usernameField: 'email',
+            passwordField: 'password',
+            passReqToCallback: true
+        },
+        function(req, email, password, done){
+            var generateHash = function(password){
+                return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
+            };
+
+            User.findOne({
+                where:{
+                    email: email
+                }
+            }).then(function(user){
+                if(user){
+                    req.session.message = 'That email is taken';
+                    req.session.messages = [];
+                    return done(null, false);
+                } else {
+                    var userPassword = generateHash(password);
+                    var data = {
+                        email: email,
+                        password: userPassword,
+                        firstname: req.body.firstname,
+                        lastname: req.body.lastname
+                    };
+
+                    User.create(data).then(function(newUser, created){
+                        if (!newUser){
+                            return done(null, false);
+                        }
+                        if (newUser){
+                            return done(null, newUser);
+                        }
+                    });
+                }
+            });
+        }
+    ));
+
+    passport.use('local-signin', new LocalStrategy(
+        {
+            usernameField: 'email',
+            passwordField: 'password',
+            passReqToCallback: true
+        },
+
+        function(req, email, password, done) {
+            var User = user;
+            var isValidPassword = function (userpass, password){
+                return bCrypt.compareSync(password, userpass);
+            }
+
+            User.findOne({
+                where:{
+                    email: email
+                }
+            }).then(function(user){
+                if (!user){
+                    req.session.message = 'Incorrect email';
+                    req.session.messages = [];
+                    return done(null, false);
+                }
+
+                if (!isValidPassword(user.password, password)){
+                    req.session.message = 'Incorrect password';
+                    req.session.messages = [];
+                    return done(null, false);
+                }
+
+                var userinfo = user.get();
+                return done(null, userinfo)
+            }).catch(function(err){
+                console.log("Error", err);
+                req.session.message = 'Error occurred while signin. Please, try again';
+                req.session.messages = [];
+                return done(null, false);
+            });
+        }
+    ));
+
+    passport.serializeUser(function(user, done){
+        done(null, user.id);
+    });
+
+    passport.deserializeUser(function(id, done){
+        User.findById(id).then(function(user){
+            if (user){
+                done(null, user.get());
+            } else {
+                done(user.errors, null);
+            }
+        });
+    });
+}

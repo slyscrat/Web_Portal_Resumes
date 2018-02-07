@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>Register Page</title>
+</head>
+ 
+<body>
+    <div align="center" style="color: red">
+        <p id="message">{{signup_error}}</p>
+    </div>
+    <form id="signup" name="signup" method="post" action="/signup" align="center" onSubmit="return check_null()">
+        <label for="email">Email</label></br>
+        <input class="text" name="email" type="email" id="notnull"/></br>
+        <label for="firstname">Firstname</label></br>
+        <input name="firstname" type="text" id="notnull"/></br>
+        <label for="lastname">Lastname</label></br>
+        <input name="lastname" type="text" id="notnull"/></br>
+        <label for="password">Password</label></br>
+        <input name="password" type="password" id="password" onchange="check_pass()"/></br>
+        <label for="confirm_password">Confirm password</label></br>
+        <input name="confirm_password" type="password" id="confirm_password" onchange="check_pass()"/></br></br>
+        <input class="btn" type="submit" value="Sign Up" id="submit" disabled/>
+    </form>
+     <div align="center">
+        <p style="color: green">Already have an account?</p>
+        <input type="button" value="Sign in" onclick='location.href="./signin"'/>
+    </div>
+    
+    <script type="text/javascript">
+		function check_pass() {
+			if (document.getElementById('password').value == document.getElementById('confirm_password').value) {
+				document.getElementById('submit').disabled = false;
+				document.getElementById('message').innerHTML = '';
+			} else {
+				document.getElementById('submit').disabled = true;
+				document.getElementById('message').innerHTML = 'Passwords are not matching';
+			}
+		}
+		
+		function check_null(){
+		    var elems = document.querySelectorAll('#notnull');
+			var empty;
+		    elems.forEach(function(el){
+					if (el.value == '') {empty = true; return false;}
+				});
+			if (empty) {
+			    document.getElementById('message').innerHTML = 'All fields must be filled';
+			    return false;
+			}
+		}
+    </script>
+</body>
+ 
+</html>
