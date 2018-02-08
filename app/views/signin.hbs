@@ -1,24 +1,92 @@
 <!DOCTYPE html>
 <html>
- 
-<head>
-    <title>Log in Page</title>
-</head>
- 
-<body>
-    <div align="center" style="color: red">
-        <p id="message">{{signin_error}}</p>
-    </div>
-    <form id="signin" name="signin" method="post" action="signin" align = "center">
-        <label for="email">Email Address</label></br>
-        <input class="text" name="email" type="text" /></br>
-        <label for="password">Password</label></br>
-        <input name="password" type="password" /></br></br>
-        <input class="btn" type="submit" value="Sign In"/></br></br>
-    </form>
-    <div align="center">
+    <head>
+        <meta charset="utf-8" />
+        <title>bla bla bla</title>
+        <script crossorigin src="https://unpkg.com/react@15/dist/react.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script> 
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    	<script type="text/babel">
+    	
+    	    class Form extends React.Component {
+            constructor(props) {
+                super(props);
+                var email = props.email;
+                var emailIsValid = this.validateEmail(email);
+                var password = props.password;
+                var passwordIsValid = this.validatePassword(password);
+                this.state = {email: email, password: password, emailValid: emailIsValid, passwordValid: passwordIsValid};
+               
+                this.onEmailChange = this.onEmailChange.bind(this);
+                this.onPasswordChange = this.onPasswordChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+        
+            validatePassword(password){
+    			if (/\s/.test(password))
+    				return false;
+    			if (/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\w).{8,}/.test(password))
+    				return true;
+    			return false;
+            }
+            
+            validateEmail(email){
+    			if (/\s/.test(email))
+    				return false;
+                return true;
+            }
+            
+            onPasswordChange(event) {
+                var val = event.target.value;
+                var valid = this.validatePassword(val);
+                this.setState({password: val, passwordValid: valid});
+            }
+            
+            onEmailChange(event) {
+            var val = event.target.value;
+            var valid = this.validateEmail(val);
+            var valid = true
+            this.setState({email: val, emailValid: valid});
+            }
+        
+            handleSubmit(event) {
+                alert('Text field value is: ' + this.state.email);
+            }
+        
+            render() {
+                var emailColor = this.state.emailValid === true ? "blue":"red";
+                var passwordColor = this.state.passwordValid === true ? "blue":"red";
+                return (
+                        <form id="signin" name="signin" method="post" action="signin" align="center">
+                            <label for="email">Email address</label><br/>
+                            <input class="text" name="email" type="text"
+                             value={this.state.email}
+                             onChange={this.onEmailChange} /><br/>
+                            <label for="password">Password</label><br/>
+                            <input name="password" type="password"
+                             value={this.state.password}
+                             onChange={this.onPasswordChange} /><br/>
+                            <input class="btn" type="submit" value="Sign In"/>
+                         </form>
+                     );
+            }
+        }
+        
+         ReactDOM.render(
+             <Form />,
+             document.getElementById('root')
+         );
+        </script>
+
+    	</head>
+    <body>
+        <div align="center" style="color: red">
+            <p id="message">{{signin_error}}</p>
+        </div>
+        <div id="root"></div>
+        <div align="center">
         <input type="button" value="Registration" onclick='location.href="./signup"'/>
-    </div>
-</body>
- 
+        </div>
+     </body>
 </html>
