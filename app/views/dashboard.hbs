@@ -2,13 +2,61 @@
 <html>
  
 <head>
-    <title>Result page</title>
+    <title>User page</title>
 </head>
  
-<body>
-    <h2>Dashboard</h2>
-    <h5>Hurray! you are logged in.</h5>
+<body onload="go()">
+    <div align="center" style="color: red">
+        <p id="message">{{dashboard_message}}</p>           <!-- в коде (passport.js или др.) присвоить dashboard_message: req.session.message -->
+    </div>
+    <div align="left">
+        <p name="email" type="text">Your email: {{user.email}}</p>
+    </div>
+    <form id="signup" name="signup" method="post" action="/dashboard" align="left" onSubmit="return check_null()">
+        <label for="firstname">Your first name</label>
+        <input name="firstname" type="text" value="{{user.firstname}}"/></br></br>
+        <label for="lastname">Your last name</label>
+        <input name="lastname" type="text" value="{{user.lastname}}"/></br></br>
+        <label for="patronymic">Patronymic</label>
+        <input name="patronymic" type="text" value="{{user.patronymic}}"/></br></br>
+        <label for="site">Site</label>
+        <input name="site" type="text" value="{{user.site}}"/></br></br>
+        <label for="lastname">Birth date</label>
+        <input name="birth_date" type="date" value="{{user.birth_date}}" max="2015-02-09"/></br></br>
+        <span class="validity"></span>
+        <div>
+            <label for="gender">Gender</label>
+            <input name ="gender" id="gender_f" type="radio" value="f"/>
+            <label for="gender_f">Female</label>
+            <input name ="gender" id="gender_m" type="radio" value="m"/>
+            <label for="gender_m">Male</label>
+        </div></br>
+        <div>
+            <label for="business_trips">How often you are ready to go on business trips?</label>
+            <input name ="business_trips" id="always" type="radio" value="a"/>
+            <label for="always">Always</label>
+            <input name ="business_trips" id="sometimes" type="radio" value="s"/>
+            <label for="sometimes">Sometimes</label>
+            <input name ="business_trips" id="never" type="radio" value="n"/>
+            <label for="never">Never</label>
+            </div></br>
+        <label for="citizenship">Citizenship</label>
+        <input name="citizenship" type="text" value="{{user.citizenship}}"/></br></br>
+        <label for="phone_number">Phone_number</label>
+        <input name="phone_number" type="text" value="{{user.phone_number}}"/></br></br>
+        <input class="btn" type="submit" value="Update" id="update"/></br></br>
+    </form>
     <input type="button" value="Log out" onclick='location.href="./logout"'/>
+    <script>
+        function go(){
+            if ("{{user.gender}}" == 'f') { document.getElementById("gender_f").checked = true;}
+            else if ("{{user.gender}}" == 'm') { document.getElementById("gender_m").checked = true;};
+            
+            if ("{{user.business_trip}}" == 'a') {document.getElementById("always").checked = true;}
+            else if ("{{user.business_trip}}" == 's') {document.getElementById("sometimes").checked = true;}
+            else if ("{{user.business_trip}}" == 'n') {document.getElementById("never").checked = true;};
+        }
+    </script>
 </body>
- 
+
 </html>
