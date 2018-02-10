@@ -6,7 +6,7 @@ exports.signin = function(req, res) {
     res.render('signin', {signin_error: req.session.message});
 }
 exports.dashboard = function(req, res) {
-    res.render('dashboard', {user: req.user});
+    res.render('dashboard', {user: req.user, dashboard_message: req.session.message});
 }
 exports.main = function(req, res) {
     res.render('main');

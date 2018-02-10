@@ -16,15 +16,18 @@
                 var email = props.email;
                 var emailIsValid = this.validateEmail(email);
                 var password = props.password;
+                var confirm = props.confirm;
+                var confirmIsValid = this.validateConfirm();
                 var passwordIsValid = this.validatePassword(password);
                 var firstname = props.firstname;
                 var lastname = props.lastname;
-                this.state = {email: email, password: password, emailValid: emailIsValid, passwordValid: passwordIsValid, lastname: lastname, firstname: firstname};
+                this.state = {email: email, password: password, emailValid: emailIsValid, passwordValid: passwordIsValid, firstname: firstname, lastname: lastname, confirm: confirm, confirmValid: confirmIsValid};
                
                 this.onEmailChange = this.onEmailChange.bind(this);
                 this.onPasswordChange = this.onPasswordChange.bind(this);
-                this.onFirstChange = this.onFirstChange.bind(this);
-                this.onSecondChange = this.onSecondChange.bind(this);
+                this.onFirstnameChange = this.onFirstnameChange.bind(this);
+                this.onLastnameChange = this.onLastnameChange.bind(this);
+                this.onConfirmChange = this.onConfirmChange.bind(this);
                 this.handleSubmit = this.handleSubmit.bind(this);
             }
         
@@ -36,10 +39,15 @@
     			return false;
             }
             
-            validateEmail(email){
-    			if (/\s/.test(email))
-    				return false;
-                return true;
+            validateConfirm(){
+            
+            }
+            
+            validateEmail(email) {
+    			if (/1/.test(email))
+                    return true;
+                //https://www.npmjs.com/package/react-validation
+                return false;
             }
             
             onPasswordChange(event) {
@@ -48,12 +56,17 @@
                 this.setState({password: val, passwordValid: valid});
             }
             
-            onSecondChange(event) {
+            onConfirmChange(event){
+                this.setState({confirm: event.target.value});
+            }
+            
+            onLastnameChange(event) {
                 this.setState({lastname: event.target.value});
             }
             
-            onFirstChange(event) {
-                this.setState({firstname: event.target.value});
+            onFirstnameChange(event) {
+                var val = event.target.value;
+                this.setState({firstname: val});
             }
             
             onEmailChange(event) {
@@ -64,23 +77,39 @@
             }
         
             handleSubmit(event) {
-                alert('Text field value is: ' + this.state.email);
+                
             }
         
             render() {
-                var emailColor = this.state.emailValid === true ? "blue":"red";
-                var passwordColor = this.state.passwordValid === true ? "blue":"red";
+                var validPassword = this.state.confirm === this.state.password ? true:false
+                var confirmColor = validPassword === true ? "✓":"✗";
+                var passwordColor = this.state.passwordValid === true ? "✓":"✗";
+                var emailColor = this.state.emailValid === true ? "✓":"✗";
                 return (
-                        <form id="signup" name="signup" method="post" action="/signup" align="center" onSubmit="return check()">
+                        <form id="signup" name="signup" method="post" action="/signup" align="center">
                            
                             <input class="text" name="email" type="email"
                              value={this.state.email} placeholder="Email address"
                              onChange={this.onEmailChange} /><br/>
+                             
+                            <input class="text" type="text" name="firstname" 
+                            value={this.state.firstname} placeholder="First name"
+                            onChange={this.onFirstnameChange} /><br/>
                             
-                            <input name="password" type="password"
+                            <input class="text" type="text" name="lastname" 
+                            value={this.state.lastname} placeholder="Last name"
+                            onChange={this.onLastnameChange} /><br/>
+                        
+                            <input name="password" type="password" id="password"
                              value={this.state.password} placeholder="Password"
                              onChange={this.onPasswordChange} /><br/>
-                            <input class="btn" type="submit" value="Sign-Up"/>
+                             
+                            <input name="confirm" type="password" id="confirm_password"
+                             value={this.state.confirm} placeholder="Confirm password"
+                             onChange={this.onConfirmChange} /><br/>
+                             <h1>{emailColor} - {passwordColor} - {confirmColor}</h1>
+                             <h1></h1>
+                            <input class="btn" type="submit" value="Sign-Up" id="submit" onclick="return check()"/>
                          </form>
                      );
             }
@@ -91,6 +120,7 @@
              document.getElementById('root')
          );
         </script>
+        
         <style>
             @import url(https://fonts.googleapis.com/css?family=Open+Sans);
             .btn { display: inline-block; *display: inline; *zoom: 1; padding: 4px 10px 4px; margin-bottom: 0; font-size: 13px; line-height: 18px; color: #333333; text-align: center;text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); vertical-align: middle; background-color: #f5f5f5; background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6); background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6)); background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); background-image: -o-linear-gradient(top, #ffffff, #e6e6e6); background-image: linear-gradient(top, #ffffff, #e6e6e6); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#ffffff, endColorstr=#e6e6e6, GradientType=0); border-color: #e6e6e6 #e6e6e6 #e6e6e6; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); border: 1px solid #e6e6e6; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); cursor: pointer; *margin-left: .3em; }
@@ -119,14 +149,32 @@
             	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
             	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
             }
-            .userForm {
+            .regForm {
                 position: absolute;
-            	top: 30%;
+            	top: 25%;
             	left: 50%;
             	margin: -150px 0 0 -150px;
             	width:300px;
             	height:300px;
             }
+            
+            .holder {
+                position: relative;
+            }
+            
+            .block {
+                position:absolute;
+                left:0;
+                bottom:0;
+                right:0;
+                top:0;
+                display:none;
+            }    
+            
+            .holder:hover .block{
+                display: block;
+            }
+            
             .about {
                 position:fixed;
                 bottom:10px;
@@ -137,14 +185,7 @@
                 letter-spacing:1px;
             }
             h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
-            /*.registration {
-                position: absolute;
-            	top: 60%;
-            	left: 50%;
-            	margin: -150px 0 0 -150px;
-            	width:300px;
-            	height:300px;
-            }*/
+           
             input { 
             	width: 100%; 
             	margin-bottom: 10px; 
@@ -165,7 +206,6 @@
             	transition: box-shadow .5s ease;
             }
             input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
-                      
         </style>
         </head>
     <body>
@@ -173,11 +213,9 @@
             <div align="center" class="signin">
                 <h1>Sign-Up</h1>
                 <div align="center" style="color: red" class="errors">
-                    <p id="message">{{signin_error}}</p>
+                    <p id="message">{{signup_error}}</p>
                 </div>
                 <div id="root" align="center" class="form"></div>
-            </div>
-            <div>
             </div>
             <div align="center" class="signin">
                 <h1>Already have an account?</h1>

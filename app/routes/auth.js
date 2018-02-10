@@ -1,4 +1,5 @@
 var authController = require('../controllers/authcontroller.js');
+var dataAction = require('../data/data.js');
 module.exports = function(app, passport){
     app.get('/', authController.main);
     app.get('/signup', authController.signup);
@@ -13,7 +14,9 @@ module.exports = function(app, passport){
         successRedirect: '/',
         failureRedirect: '/signin'
     }))
-
+    
+    app.post('/dashboard', isLoggedIn, dataAction.update, authController.dashboard);
+    
     app.get('/logout', authController.logout);
     app.get('/dashboard', isLoggedIn, authController.dashboard);
     

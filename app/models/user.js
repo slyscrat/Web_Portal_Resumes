@@ -31,7 +31,7 @@ module.exports = function(sequelize, Sequelize){
         },
 
         birth_date:{
-            type: Sequelize.DATE
+            type: Sequelize.DATEONLY
         },
 
         gender:{

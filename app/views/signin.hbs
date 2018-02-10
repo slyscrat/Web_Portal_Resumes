@@ -14,50 +14,29 @@
             constructor(props) {
                 super(props);
                 var email = props.email;
-                var emailIsValid = this.validateEmail(email);
                 var password = props.password;
-                var passwordIsValid = this.validatePassword(password);
-                this.state = {email: email, password: password, emailValid: emailIsValid, passwordValid: passwordIsValid};
+                this.state = {email: email, password: password};
                
                 this.onEmailChange = this.onEmailChange.bind(this);
                 this.onPasswordChange = this.onPasswordChange.bind(this);
                 this.handleSubmit = this.handleSubmit.bind(this);
             }
-        
-            validatePassword(password){
-    			if (/\s/.test(password))
-    				return false;
-    			if (/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\w).{8,}/.test(password))
-    				return true;
-    			return false;
-            }
-            
-            validateEmail(email){
-    			if (/\s/.test(email))
-    				return false;
-                return true;
-            }
             
             onPasswordChange(event) {
                 var val = event.target.value;
-                var valid = this.validatePassword(val);
-                this.setState({password: val, passwordValid: valid});
+                this.setState({password: val});
             }
             
             onEmailChange(event) {
             var val = event.target.value;
-            var valid = this.validateEmail(val);
-            var valid = true
-            this.setState({email: val, emailValid: valid});
+            this.setState({email: val});
             }
         
             handleSubmit(event) {
-                alert('Text field value is: ' + this.state.email);
+                
             }
         
             render() {
-                var emailColor = this.state.emailValid === true ? "blue":"red";
-                var passwordColor = this.state.passwordValid === true ? "blue":"red";
                 return (
                         <form id="signin" name="signin" method="post" action="signin" align="center">
                            
@@ -125,14 +104,7 @@
                 letter-spacing:1px;
             }
             h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
-            /*.registration {
-                position: absolute;
-            	top: 60%;
-            	left: 50%;
-            	margin: -150px 0 0 -150px;
-            	width:300px;
-            	height:300px;
-            }*/
+        
             input { 
             	width: 100%; 
             	margin-bottom: 10px; 
@@ -165,9 +137,6 @@
                     <p id="message">{{signin_error}}</p>
                 </div>
                 <div id="root" align="center" class="form"></div>
-            </div>
-            <div>
-                
             </div>
             <div align="center" class="registration">
                 <h1>There is still no account? </h1>
