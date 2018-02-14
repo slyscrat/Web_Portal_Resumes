@@ -14,6 +14,7 @@ module.exports = function(app, passport){
         successRedirect: '/',
         failureRedirect: '/signin'
     }))
+    app.get('/resumes', authController.resumes)
     
     app.post('/dashboard', isLoggedIn, dataAction.update, authController.dashboard);
     

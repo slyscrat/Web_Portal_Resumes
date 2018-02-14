@@ -1,47 +1,346 @@
 <!DOCTYPE html>
 <html>
- 
-<head>
-    <title>User page</title>
-</head>
- 
-<body onload="go()">
-    <div align="center" style="color: red">
-        <p id="message">{{dashboard_message}}</p>
-    </div>
-    <form id="dashboard" name="dashboard" method="post" action="/dashboard" align="left" onSubmit="return check_null()">
-        <label for="firstname">Your first name</label>
-        <input name="firstname" type="text" value="{{user.firstname}}"/></br></br>
-        <label for="lastname">Your last name</label>
-        <input name="lastname" type="text" value="{{user.lastname}}"/></br></br>
-        <label for="patronymic">Patronymic</label>
-        <input name="patronymic" type="text" value="{{user.patronymic}}"/></br></br>
-        <label for="site">Site</label>
-        <input name="site" type="text" value="{{user.site}}"/></br></br>
-        <label for="lastname">Birth date</label>
-        <input name="birth_date" type="date" value="{{user.birth_date}}" min="1918-02-09" max="2015-02-09"/></br></br>
-        <span class="validity"></span>
-        <label for="gender">Gender</label>
-        <input name ="gender" id="gender_f" type="radio" value="f"/>
-        <label for="gender_f">Female</label>
-        <input name ="gender" id="gender_m" type="radio" value="m"/>
-        <label for="gender_m">Male</label></br></br>
-        <label for="business_trip">How often you are ready to go on business trips?</label>
-        <input name ="business_trip" id="always" type="radio" value="a"/>
-        <label for="always">Always</label>
-        <input name ="business_trip" id="sometimes" type="radio" value="s"/>
-        <label for="sometimes">Sometimes</label>
-        <input name ="business_trip" id="never" type="radio" value="n"/>
-        <label for="never">Never</label></br></br>
-        <label for="citizenship">Citizenship</label>
-        <input name="citizenship" type="text" value="{{user.citizenship}}"/></br></br>
-        <label for="phone_number">Phone_number</label>
-        <input name="phone_number" type="text" value="{{user.phone_number}}"/></br></br>
-        <input class="btn" type="submit" value="Update" id="update"/></br></br>
-    </form>
-    <input type="button" value="Log out" onclick='location.href="./logout"'/>
-    <script>
-        function go(){
+	<head>
+	    <meta charset="utf-8" />
+        <link rel="shortcut icon" href="http://s1.iconbird.com/ico/2013/9/452/w512h5121380477054shop.png" type="image/x-icon">
+        <title>User page</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+		
+		<style>
+		@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+            * { -webkit-box-sizing:border-box; 
+            -moz-box-sizing:border-box; 
+            -ms-box-sizing:border-box; 
+            -o-box-sizing:border-box; 
+            box-sizing:border-box; 
+                
+            }
+            
+            .about {
+                position:fixed;
+                bottom:10px;
+                text-align: center;
+                width: 100%;
+                color: #fff; 
+                text-shadow: 0 0 10px rgba(0,0,0,0.3); 
+                letter-spacing:1px;
+            }
+            
+            h1, label {
+                color: #fff; 
+                text-shadow: 0 0 10px rgba(0,0,0,0.3); 
+                letter-spacing:1px; 
+                text-align:center; 
+            }
+            
+            h2 {
+                color: #fff; 
+                text-shadow: 0 0 10px rgba(0,0,0,0.3); 
+                letter-spacing:1px; 
+            }
+        
+            input { 
+            	margin-bottom: 10px; 
+            	margin-left: 10px;
+            	background: rgba(0,0,0,0.3);
+            	outline: none;
+            	padding: 10px;
+            	font-size: 13px;
+            	color: #fff;
+            	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+            	border: 1px solid rgba(0,0,0,0.3);
+            	border-radius: 4px;
+            	box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+            	-webkit-transition: box-shadow .5s ease;
+            	-moz-transition: box-shadow .5s ease;
+            	-o-transition: box-shadow .5s ease;
+            	-ms-transition: box-shadow .5s ease;
+            	transition: box-shadow .5s ease;
+            }
+            
+            input:focus { 
+                box-shadow: 
+                inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); 
+                
+            }
+            
+    		body,
+    		html {
+    		    padding: 0;
+    		    margin: 0;
+    		    width: 100%;
+            	height:100%;
+            	font-family: 'Open Sans', sans-serif;
+            	background: #092756;
+            	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
+            	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
+            	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+    		}
+    
+    		main {
+    		  z-index: 2;
+    		  position: relative;
+    		  height: 100%;
+    		  background: #092756;
+            	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
+            	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
+            	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+    		}
+    
+    		.sidebar {
+    		  height: 100%;
+    		  width: 300px;
+    		  position: fixed;
+    		  top: 0;
+    		  z-index: 1;
+    		  right: 0;
+    		  background-color: #EF8354;
+    		}
+    
+    		.bar {
+    		  display: block;
+    		  height: 5px;
+    		  width: 50px;
+    		  background-color: #EF8354;
+    		  margin: 10px auto;
+    		}
+    
+    		.button {
+    		  cursor: pointer;
+    		  display: inline-block;
+    		  width: auto;
+    		  margin: 0 auto;
+    		  -webkit-transition: all .7s ease;
+    		  -moz-transition: all .7s ease;
+    		  -ms-transition: all .7s ease;
+    		  -o-transition: all .7s ease;
+    		  transition: all .7s ease;
+    		}
+    
+    		.nav-right {
+    		  position: fixed;
+    		  right: 30px;
+    		  top: 20px;
+    		}
+    
+    		.nav-right.visible-xs {
+    		  z-index: 3;
+    		}
+    
+    		.hidden-xs {
+    		  display: none;
+    		}
+    
+    		.middle {
+    		  margin: 0 auto;
+    		}
+    
+    		.bar {
+    		  -webkit-transition: all .7s ease;
+    		  -moz-transition: all .7s ease;
+    		  -ms-transition: all .7s ease;
+    		  -o-transition: all .7s ease;
+    		  transition: all .7s ease;
+    		}
+    
+    		.nav-right.visible-xs .active .bar {
+    		  background-color: #FFF;
+    		  -webkit-transition: all .7s ease;
+    		  -moz-transition: all .7s ease;
+    		  -ms-transition: all .7s ease;
+    		  -o-transition: all .7s ease;
+    		  transition: all .7s ease;
+    		}
+    
+    		.button.active .top {
+    		  -webkit-transform: translateX(-300px) translateY(15px) rotateZ(45deg);
+    		  -moz-transform: translateX(-300px) translateY(15px) rotateZ(45deg);
+    		  -ms-transform: translateX(-300px) translateY(15px) rotateZ(45deg);
+    		  -o-transform: translateX(-300px) translateY(15px) rotateZ(45deg);
+    		  transform: translateX(-300px) translateY(15px) rotateZ(45deg);
+    		}
+    
+    		.button.active .bottom {
+    		  -webkit-transform: translateX(-300px) translateY(-15px) rotateZ(-45deg);
+    		  -moz-transform: translateX(-300px) translateY(-15px) rotateZ(-45deg);
+    		  -ms-transform: translateX(-300px) translateY(-15px) rotateZ(-45deg);
+    		  -o-transform: translateX(-300px) translateY(-15px) rotateZ(-45deg);
+    		  transform: translateX(-300px) translateY(-15px) rotateZ(-45deg);
+    		}
+    
+    		.button.active .middle {
+    		  width: 0;
+    		}
+    
+    		.move-to-left {
+    		  z-index: 4;
+    		}
+    		
+    		.hide-back {
+    		    background: rgba(0, 0, 0, 0.4);
+    		}
+    
+    		nav {
+    		  padding-top: 30px;
+    		}
+    
+    		.sidebar-list {
+    		  padding: 0;
+    		  margin: 0;
+    		  list-style: none;
+    		  position: relative;
+    		  margin-top: 150px;
+    		  text-align: center;
+    		}
+    
+    		.sidebar-item {
+    		  margin: 30px 0;
+    		  opacity: 0;
+    		  -webkit-transform: translateY(-20px);
+    		  -moz-transform: translateY(-20px);
+    		  -ms-transform: translateY(-20px);
+    		  -o-transform: translateY(-20px);
+    		  transform: translateY(-20px);
+    		}
+    
+    		.sidebar-item:first-child {
+    		  -webkit-transition: all .7s .2s ease-in-out;
+    		  -moz-transition: all .7s .2s ease-in-out;
+    		  -ms-transition: all .7s .2s ease-in-out;
+    		  -o-transition: all .7s .2s ease-in-out;
+    		  transition: all .7s .2s ease-in-out;
+    		}
+    
+    		.sidebar-item:nth-child(2) {
+    		  -webkit-transition: all .7s .4s ease-in-out;
+    		  -moz-transition: all .7s .4s ease-in-out;
+    		  -ms-transition: all .7s .4s ease-in-out;
+    		  -o-transition: all .7s .4s ease-in-out;
+    		  transition: all .7s .4s ease-in-out;
+    		}
+    
+    		.sidebar-item:last-child {
+    		  -webkit-transition: all .7s .6s ease-in-out;
+    		  -moz-transition: all .7s .6s ease-in-out;
+    		  -ms-transition: all .7s .6s ease-in-out;
+    		  -o-transition: all .7s .6s ease-in-out;
+    		  transition: all .7s .6s ease-in-out;
+    		}
+    
+    		.sidebar-item.active {
+    		  opacity: 1;
+    		  -webkit-transform: translateY(0px);
+    		  -moz-transform: translateY(0px);
+    		  -ms-transform: translateY(0px);
+    		  -o-transform: translateY(0px);
+    		  transform: translateY(0px);
+    		}
+    
+    		.sidebar-anchor {
+    		  color: #FFF;
+    		  text-decoration: none;
+    		  font-size: 1.8em;
+    		  text-transform: uppercase;
+    		  position: relative;
+    		  padding-bottom: 7px;
+    		}
+    
+    		.sidebar-anchor:before {
+    		  content: "";
+    		  width: 0;
+    		  height: 2px;
+    		  position: absolute;
+    		  bottom: 0;
+    		  left: 0;
+    		  background-color: #FFF;
+    		  -webkit-transition: all .7s ease-in-out;
+    		  -moz-transition: all .7s ease-in-out;
+    		  -ms-transition: all .7s ease-in-out;
+    		  -o-transition: all .7s ease-in-out;
+    		  transition: all .7s ease-in-out;
+    		}
+    
+    		.sidebar-anchor:hover:before {
+    		  width: 100%;
+    		}
+    
+    
+    		@media (min-width: 480px) {
+    		  .nav-list {
+    			display: block;
+    		  }
+    		}
+    
+    		@media (min-width: 768px) {
+    		  .nav-right {
+    			position: absolute;
+    		  }
+    		  .hidden-xs {
+    			display: block;
+    		  }
+    		  .visible-xs {
+    			display: none;
+    		  }
+    		}
+    		
+		</style>
+		<style>
+            .radio-group input[type="radio"] {
+              display: none;
+            }
+            
+            .radio-group label {
+                display: inline-block;
+                padding: 4px 11px;
+                cursor: pointer;
+                text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+            	border: 1px solid rgba(0,0,0,0.3);
+            	border-radius: 4px;
+            	background: rgba(0,0,0,0.3);
+            }
+            
+            .radio-group input[type="radio"]:checked+label {
+              background-color: #EF8354;
+            }
+            
+            .submit input{
+                width: 150px;
+            }
+            
+            .site input{
+                width: 300px;
+            }
+            
+		</style>
+		<script>
+			$(document).ready(function() {
+
+			  function toggleSidebar() {
+				$(".button").toggleClass("active");
+				$(".sidebar").toggleClass("move-to-left");
+				$(".sidebar-item").toggleClass("active");
+				$("main").toggleClass("hide-back");
+			  }
+
+			  $(".button").on("click tap", function() {
+				toggleSidebar();
+			  });
+
+			  $(document).keyup(function(e) {
+				if (e.keyCode === 27) {
+				  toggleSidebar();
+				}
+			  });
+
+			});
+			
+			function go(){
             if ("{{user.gender}}".charAt(0) == 'f') { document.getElementById("gender_f").checked = true;}
             else if ("{{user.gender}}".charAt(0) == 'm') { document.getElementById("gender_m").checked = true;};
 
@@ -49,7 +348,91 @@
             else if ("{{user.business_trip}}".charAt(0) == 's') {document.getElementById("sometimes").checked = true;}
             else if ("{{user.business_trip}}".charAt(0) == 'n') {document.getElementById("never").checked = true;};
         }
-    </script>
-</body>
-
+		</script>
+	</head>
+	<body onload="go()">
+		<div class="nav-right visible-xs">
+		  <div class="button" id="btn">
+			<div class="bar top"></div>
+			<div class="bar middle"></div>
+			<div class="bar bottom"></div>
+		  </div>
+		</div>
+		<main>
+		  <nav>
+			<div class="nav-right hidden-xs">
+			  <div class="button" id="btn">
+				<div class="bar top"></div>
+				<div class="bar middle"></div>
+				<div class="bar bottom"></div>
+			  </div>
+			</div>
+		  </nav>
+		    <h1>Account information</h1>
+		    <div align="center" style="color: #EF8354">
+                <p id="message">{{dashboard_message}}</p><br/>
+            </div>
+        
+            <form id="dashboard" name="dashboard" method="post" action="/dashboard" align="center" onSubmit="return check_date()">
+                <label for="firstname">Your first name</label>
+                <input name="firstname" type="text" value="{{user.firstname}}"/>
+                <label for="lastname" style="margin-left: 30px;">Your last name</label>
+                <input name="lastname" type="text" value="{{user.lastname}}"/></br></br>
+                <label for="patronymic">Patronymic</label>
+                <input name="patronymic" type="text" value="{{user.patronymic}}"/>
+                <label for="birth_date" style="margin-left: 30px;">Birth date</label>
+                <input name="birth_date" type="date" value="{{user.birth_date}}" id ="birth_date" min="1918-02-09" max="2015-02-09"/></br></br>
+                <div class="site">
+                    <label for="site">Site</label>
+                    <input name="site" type="text" value="{{user.site}}"/></br>
+                </div>
+                <span class="validity"></span>
+                <div class="radio-group">
+                    <h2>How often you are ready to go on business trips?</h2>
+                    <input name ="business_trip" id="always" type="radio" value="a"/>
+                    <label for="always">Always</label>
+                    <input name ="business_trip" id="sometimes" type="radio" value="s"/>
+                    <label for="sometimes">Sometimes</label>
+                    <input name ="business_trip" id="never" type="radio" value="n"/>
+                    <label for="never">Never</label></br></br>
+                </div> 
+                <label for="citizenship">Citizenship</label>
+                <input name="citizenship" type="text" value="{{user.citizenship}}"/>
+                <label for="phone_number" style="margin-left: 30px;">Phone_number</label>
+                <input name="phone_number" type="text" value="{{user.phone_number}}"/></br>
+                <div class="radio-group">
+                        <h2>Gender</h2>
+                        <input name ="gender" id="gender_f" type="radio" value="f"/>
+                        <label for="gender_f">Female</label>
+                        <input name ="gender" id="gender_m" type="radio" value="m"/>
+                        <label for="gender_m">Male</label></br></br>
+                    </div>
+                <div class="submit">
+                    <input type="submit" value="Update" />
+                </div>
+            </form>
+            
+            <div class="about">
+                © Copyright by Ilya Butyshkis and Roman Ershov, Saint Petersburg, 2018
+            </div>
+		</main>
+		<div class="sidebar">
+		  <ul class="sidebar-list">
+			<li class="sidebar-item"><a href="./" class="sidebar-anchor">Home</a></li>
+			<li class="sidebar-item"><a href="./jobs" class="sidebar-anchor">Jobs</a></li>
+			<li class="sidebar-item"><a href="./logout" class="sidebar-anchor">Log out</a></li>
+		  </ul>
+		</div>
+		
+		<script type="text/javascript">
+	    function check_date(){
+	        var dateData = document.getElementById('birth_date').value
+	        if (!dateData) {/* тут будет обработка значения (dateData = null, а отправляет set birth_date = 'Invalid date')*/ }
+	        var time = new Date(2013, 2, 8);
+	        // пытался сделать dateData = time прото присвоить другое значение, но value не меняется
+	        alert(document.getElementById('birth_date').value);
+	        return true;
+	    }
+	    </script>
+	</body>
 </html>
