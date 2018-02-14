@@ -419,7 +419,7 @@
 		<div class="sidebar">
 		  <ul class="sidebar-list">
 			<li class="sidebar-item"><a href="./" class="sidebar-anchor">Home</a></li>
-			<li class="sidebar-item"><a href="./jobs" class="sidebar-anchor">Jobs</a></li>
+			<li class="sidebar-item"><a href="./resumes" class="sidebar-anchor">Resumes</a></li>
 			<li class="sidebar-item"><a href="./logout" class="sidebar-anchor">Log out</a></li>
 		  </ul>
 		</div>
@@ -427,11 +427,13 @@
 		<script type="text/javascript">
 	    function check_date(){
 	        var dateData = document.getElementById('birth_date').value
-	        if (!dateData) {/* тут будет обработка значения (dateData = null, а отправляет set birth_date = 'Invalid date')*/ }
-	        var time = new Date(2013, 2, 8);
+	        if (!dateData) {/* тут будет обработка значения (dateData = null, а отправляет set birth_date = 'Invalid date')*/ 
+	        //var time = new Date(2013, 2, 8);
+	        document.getElementById("message").innerHTML = "Please, enter date of birth";
 	        // пытался сделать dateData = time прото присвоить другое значение, но value не меняется
-	        alert(document.getElementById('birth_date').value);
-	        return true;
+	        //alert(document.getElementById('birth_date').value);
+	        return false;
+	        }
 	    }
 	    </script>
 	</body>
