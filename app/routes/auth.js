@@ -14,12 +14,26 @@ module.exports = function(app, passport){
         successRedirect: '/',
         failureRedirect: '/signin'
     }))
-    app.get('/resumes', authController.resumes)
+    app.get('/resumes', authController.resumes);
+    app.get('/user', function(req, res, next){
+            Nice(req, res, function(result){
+                req.result = result;
+                return next();
+            })
+        }, authController.user);
     
     app.post('/dashboard', isLoggedIn, dataAction.update, authController.dashboard);
+    app.get('/error', authController.error);
     
     app.get('/logout', authController.logout);
     app.get('/dashboard', isLoggedIn, authController.dashboard);
+    
+    function Nice (req, res, callback) {
+        dataAction.select(req, res, function(data){
+            callback(data);
+            req.result = data;
+        });
+    }
     
     function isLoggedIn (req, res, next) {
         if (req.isAuthenticated()) return next();

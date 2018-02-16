@@ -19,6 +19,13 @@ exports.resumes = function(req, res) {
     res.render('resumes', {user: req.user});
     clean_log(req)
 }
+exports.user = function(req, res){
+    res.render('user', {user: req.user, result: req.result});
+    clean_log(req)
+}
+exports.error = function(req, res){
+    res.render('error', {error: req.session.message});
+}
 exports.logout = function(req, res) {
     req.session.destroy(function(err) {
         if (err) {

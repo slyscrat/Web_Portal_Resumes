@@ -273,6 +273,7 @@
 		  
 		  
 		  <h1>this is main page</h1>
+		  <input type="button" value="Get user with id = 2" onclick="Ok();"></input>
 		</main>
 		<div class="sidebar">
 		  <ul class="sidebar-list">
@@ -282,5 +283,10 @@
 			<li class="sidebar-item"><a href="./signup" class="sidebar-anchor">Sign-Up</a></li>
 		  </ul>
 		</div>
+		<script>
+			function Ok(){
+				location.href="./user?id=2";
+			}
+		</script>
 	</body>
 </html>

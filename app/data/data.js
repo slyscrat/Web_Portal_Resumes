@@ -1,5 +1,6 @@
+var User = require('../models/index.js').user;
+
 module.exports.update = function(req, user, next){
-    var User = require('../models/index.js').user;
 
             User.findOne({
                 where:{
@@ -34,4 +35,23 @@ module.exports.update = function(req, user, next){
                     return next();
             })
     });
+};
+
+module.exports.select = function(req, res, callback){
+
+    User.findOne({
+        where:{
+            id: req.query.id
+        }
+    }).then(function(user){
+        if (!user){
+            req.session.message = "User with id = " + req.query.id +" doesn't exist";
+            req.session.messages = [];
+            console.log("User not found");
+            res.redirect("./error");
+            return;
+        }
+        var data = user.get();
+        callback(data);
+});
 };

@@ -49,6 +49,50 @@ module.exports = function(sequelize, Sequelize){
 
         phone_number:{
             type: Sequelize.STRING      // varchar(20)
+        },
+        ////////////////////////////
+        posit:{
+            type: Sequelize.STRING      // varchar(20)
+        },
+
+        sphere:{
+            type: Sequelize.STRING      // varchar(20)
+        },
+
+        skills:{
+            type: Sequelize.STRING      // varchar(20)
+        },
+
+        specialist_year:{
+            type: Sequelize.FLOAT
+        },
+
+        foreign_languages:{
+            type: Sequelize.STRING      // varchar(60)
+        },
+
+        payment:{
+            type: Sequelize.INTEGER      // varchar(20)
+        },
+
+        employment:{
+            type: Sequelize.CHAR         // f(full), p(particularly)
+        },
+
+        graphic:{
+            type: Sequelize.STRING       // varchar(20)
+        },
+
+        organization:{
+            type: Sequelize.STRING      // varchar(50)
+        },
+
+        posit_was:{
+            type: Sequelize.STRING      // varchar(30)
+        },
+
+        duty_achieves:{
+            type: Sequelize.STRING      // varchar(100)
         }
     });
     return User;
