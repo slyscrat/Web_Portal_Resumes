@@ -1,5 +1,7 @@
 var authController = require('../controllers/authcontroller.js');
 var dataAction = require('../data/data.js');
+var Action = dataAction.all;
+
 module.exports = function(app, passport){
     app.get('/', authController.main);
     app.get('/signup', authController.signup);
@@ -14,27 +16,33 @@ module.exports = function(app, passport){
         successRedirect: '/',
         failureRedirect: '/signin'
     }))
-    app.get('/resumes', authController.resumes);
+    app.get('/resumes', function(req,res,next){
+            Action = dataAction.all;
+            Nice(req, res, function(result){
+                req.result = result;
+                return next();
+            })
+        }, authController.resumes)
+    
+    app.post('/dashboard', isLoggedIn, dataAction.update, authController.dashboard);
     app.get('/user', function(req, res, next){
+            Action = dataAction.select;
             Nice(req, res, function(result){
                 req.result = result;
                 return next();
             })
         }, authController.user);
-    
-    app.post('/dashboard', isLoggedIn, dataAction.update, authController.dashboard);
-    app.get('/error', authController.error);
-    
     app.get('/logout', authController.logout);
     app.get('/dashboard', isLoggedIn, authController.dashboard);
+    app.get('/error', authController.error);
     
     function Nice (req, res, callback) {
-        dataAction.select(req, res, function(data){
+        Action(req, res, function(data){
             callback(data);
             req.result = data;
         });
     }
-    
+
     function isLoggedIn (req, res, next) {
         if (req.isAuthenticated()) return next();
         res.redirect('/signin');

@@ -16,7 +16,7 @@ exports.main = function(req, res) {
     clean_log(req)
 }
 exports.resumes = function(req, res) {
-    res.render('resumes', {user: req.user});
+    res.render('resumes', {user: req.user, result:req.result});
     clean_log(req)
 }
 exports.user = function(req, res){

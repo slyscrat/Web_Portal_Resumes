@@ -55,3 +55,19 @@ module.exports.select = function(req, res, callback){
         callback(data);
 });
 };
+
+module.exports.all = function(req, res, callback){
+    User.findAll({
+        attributes: ['id', 'firstname', 'lastname', 'sphere', 'payment']
+    }).then(function(resumes){
+        if (!resumes){
+            req.session.message = "No any users";
+            req.session.messages = [];
+            console.log("No any users");
+            res.redirect("./");
+            return;    
+        }
+        console.log(resumes[0]);
+        callback(resumes);
+    });
+}
