@@ -80,7 +80,7 @@ module.exports = function(sequelize, Sequelize){
         },
 
         graphic:{
-            type: Sequelize.STRING       // varchar(20)
+            type: Sequelize.CHAR        // f, g, u
         },
 
         organization:{

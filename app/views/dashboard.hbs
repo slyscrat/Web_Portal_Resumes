@@ -3,7 +3,7 @@
 	<head>
 	    <meta charset="utf-8" />
         <link rel="shortcut icon" href="http://s1.iconbird.com/ico/2013/9/452/w512h5121380477054shop.png" type="image/x-icon">
-        <title>User page</title>
+        <title>Profile</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 		
 		<style>
@@ -26,7 +26,7 @@
                 letter-spacing:1px;
             }
             
-            h1, label {
+            h1, label, h4 {
                 color: #fff; 
                 text-shadow: 0 0 10px rgba(0,0,0,0.3); 
                 letter-spacing:1px; 
@@ -310,13 +310,31 @@
             }
             
             .submit input{
-                width: 150px;
+                width: 250px;
             }
             
-            .site input{
+            .long input{
                 width: 300px;
             }
             
+            ::-webkit-scrollbar {
+                width: 0px;  /* remove scrollbar space */
+                background: transparent;  /* optional: just make scrollbar invisible */
+            }
+            
+            .userForm {
+                border: 1px solid rgba(0,0,0,0.3);
+            	border-radius: 20px;
+            	margin: auto;
+            	padding: 60px 0 0 0;
+            	width: 750px;
+            	height: 80%;
+            	overflow:auto;
+            }
+            
+            #dashboard {
+                height: 80%;
+            }
 		</style>
 		<script>
 			$(document).ready(function() {
@@ -347,6 +365,14 @@
             if ("{{user.business_trip}}".charAt(0) == 'a') {document.getElementById("always").checked = true;}
             else if ("{{user.business_trip}}".charAt(0) == 's') {document.getElementById("sometimes").checked = true;}
             else if ("{{user.business_trip}}".charAt(0) == 'n') {document.getElementById("never").checked = true;};
+            
+            if ("{{user.employment}}".charAt(0) == 'f') { document.getElementById("employment_f").checked = true;}
+            else if ("{{user.employment}}".charAt(0) == 'p') { document.getElementById("employment_p").checked = true;};
+            
+            if ("{{user.graphic}}".charAt(0) == 'f') {document.getElementById("full").checked = true;}
+            else if ("{{user.graphic}}".charAt(0) == 'g') {document.getElementById("flex").checked = true;}
+            else if ("{{user.graphic}}".charAt(0) == 'u') {document.getElementById("remote").checked = true;};
+            
         }
 		</script>
 	</head>
@@ -368,73 +394,102 @@
 			  </div>
 			</div>
 		  </nav>
-		    <h1>Account information</h1>
+		    <h1>Информация о пользователе</h1>
 		    <div align="center" style="color: #EF8354">
                 <p id="message">{{dashboard_message}}</p><br/>
             </div>
-        
-            <form id="dashboard" name="dashboard" method="post" action="/dashboard" align="center" onSubmit="return check_date()">
-                <label for="firstname">Your first name</label>
-                <input name="firstname" type="text" value="{{user.firstname}}"/>
-                <label for="lastname" style="margin-left: 30px;">Your last name</label>
-                <input name="lastname" type="text" value="{{user.lastname}}"/></br></br>
-                <label for="patronymic">Patronymic</label>
-                <input name="patronymic" type="text" value="{{user.patronymic}}"/>
-                <label for="birth_date" style="margin-left: 30px;">Birth date</label>
-                <input name="birth_date" type="date" value="{{user.birth_date}}" id ="birth_date" min="1918-02-09" max="2015-02-09"/></br></br>
-                <div class="site">
-                    <label for="site">Site</label>
-                    <input name="site" type="text" value="{{user.site}}"/></br>
-                </div>
-                <span class="validity"></span>
-                <div class="radio-group">
-                    <h2>How often you are ready to go on business trips?</h2>
-                    <input name ="business_trip" id="always" type="radio" value="a"/>
-                    <label for="always">Always</label>
-                    <input name ="business_trip" id="sometimes" type="radio" value="s"/>
-                    <label for="sometimes">Sometimes</label>
-                    <input name ="business_trip" id="never" type="radio" value="n"/>
-                    <label for="never">Never</label></br></br>
-                </div> 
-                <label for="citizenship">Citizenship</label>
-                <input name="citizenship" type="text" value="{{user.citizenship}}"/>
-                <label for="phone_number" style="margin-left: 30px;">Phone_number</label>
-                <input name="phone_number" type="text" value="{{user.phone_number}}"/></br>
-                <div class="radio-group">
-                        <h2>Gender</h2>
-                        <input name ="gender" id="gender_f" type="radio" value="f"/>
-                        <label for="gender_f">Female</label>
-                        <input name ="gender" id="gender_m" type="radio" value="m"/>
-                        <label for="gender_m">Male</label></br></br>
+                <form id="dashboard" name="dashboard" method="post" action="/dashboard" align="center">
+                    <div class="userForm">
+                        <label for="firstname">Имя</label>
+                        <input name="firstname" type="text" value="{{user.firstname}}"/>
+                        <label for="lastname" style="margin-left: 30px;">Фамилия</label>
+                        <input name="lastname" type="text" value="{{user.lastname}}"/></br></br>
+                        <label for="patronymic">Отчество</label>
+                        <input name="patronymic" type="text" value="{{user.patronymic}}"/>
+                        <label for="birth_date" style="margin-left: 30px;">Дата рождения</label>
+                        <input name="birth_date" type="date" value="{{user.birth_date}}" required/></br></br>
+                        <div class="long">
+                            <label for="site">Сайт</label>
+                            <input name="site" type="text" value="{{user.site}}"/></br>
+                        </div>
+                        <span class="validity"></span>
+                        <div class="radio-group">
+                            <h4>Как часто вы готовы ездить в командировки?</h4>
+                            <input name ="business_trip" id="always" type="radio" value="a"/>
+                            <label for="always">Всегда</label>
+                            <input name ="business_trip" id="sometimes" type="radio" value="s"/>
+                            <label for="sometimes">Иногда</label>
+                            <input name ="business_trip" id="never" type="radio" value="n"/>
+                            <label for="never">Никогда</label></br></br>
+                        </div> 
+                        <label for="citizenship">Город</label>
+                        <input name="citizenship" type="text" value="{{user.citizenship}}"/>
+                        <label for="phone_number" style="margin-left: 30px;">Номер телефона</label>
+                        <input name="phone_number" type="text" value="{{user.phone_number}}"/></br>
+                        <div class="radio-group">
+                            <h4>Пол</h4>
+                            <input name ="gender" id="gender_f" type="radio" value="f" required/>
+                            <label for="gender_f">Женский</label>
+                            <input name ="gender" id="gender_m" type="radio" value="m"/>
+                            <label for="gender_m">Мужской</label></br></br>
+                        </div>
+                        <label for="posit">Должность</label>
+                        <input name="posit" type="text" value="{{user.posit}}"/>
+                        <label for="sphere" style="margin-left: 30px;">Сфера работы</label>
+                        <input name="sphere" type="text" value="{{user.sphere}}"/></br></br>
+                        <label for="skills">Навыки</label>
+                        <input name="skills" type="text" value="{{user.skills}}"/>
+                        <label for="specialist_year" style="margin-left: 30px;">Опыт работы</label>
+                        <input name="specialist_year" type="number" step="0.5" value="{{user.specialist_year}}"/></br></br>
+                        <div class="long">
+                            <label for="foreign_languages">Иностранные языки</label>
+                            <input name="foreign_languages" type="text" value="{{user.foreign_languages}}"/></br></br>
+                        </div>
+                        <label for="payment">Заработная плата</label>
+                        <input name="payment" type="number" value="{{user.payment}}"/>
+                        <label for="organization" style="margin-left: 30px;">Организация</label>
+                        <input name="organization" type="text" value="{{user.organization}}"/></br></br>
+                        <div class="radio-group">
+                                <h4>Занятость</h4>
+                                <input name ="employment" id="employment_f" type="radio" value="f"/>
+                                <label for="employment_f">Полная</label>
+                                <input name ="employment" id="employment_p" type="radio" value="p"/>
+                                <label for="employment_p">Частичная</label></br></br>
+                        </div>
+                        <div class="radio-group">
+                            <h4>График работы</h4>
+                            <input name ="graphic" id="full" type="radio" value="f"/>
+                            <label for="full">Полный день</label>
+                            <input name ="graphic" id="flex" type="radio" value="g"/>
+                            <label for="flex">Гибкий график</label>
+                            <input name ="graphic" id="remote" type="radio" value="u"/>
+                            <label for="remote">Удаленная работа</label></br></br>
+                        </div> 
+                        <label for="posit_was" style="margin-left: 30px;">Предыдущая должность</label>
+                        <input name="posit_was" type="text" value="{{user.posit_was}}"/></br></br>
+                        <div class="long">
+                            <label for="duty_achieves">Достижения</label>
+                            <input name="duty_achieves" type="text" value="{{user.duty_achieves}}"/></br></br>
+                        </div>
+                        
+                        
                     </div>
-                <div class="submit">
-                    <input type="submit" value="Update" />
-                </div>
-            </form>
+                    <br>
+                    <div class="submit">
+                        <input type="submit" value="Обновить информацию" />
+                    </div>
+                </form>
             
             <div class="about">
-                © Copyright by Ilya Butyshkis and Roman Ershov, Saint Petersburg, 2018
+                © Бутышкис Илья и Ершов Роман, Санкт-Петербург, 2018
             </div>
 		</main>
 		<div class="sidebar">
 		  <ul class="sidebar-list">
-			<li class="sidebar-item"><a href="./" class="sidebar-anchor">Home</a></li>
-			<li class="sidebar-item"><a href="./resumes" class="sidebar-anchor">Resumes</a></li>
-			<li class="sidebar-item"><a href="./logout" class="sidebar-anchor">Log out</a></li>
+			<li class="sidebar-item"><a href="./" class="sidebar-anchor">Главная</a></li>
+			<li class="sidebar-item"><a href="./resumes" class="sidebar-anchor">Резюме</a></li>
+			<li class="sidebar-item"><a href="./logout" class="sidebar-anchor">Выход</a></li>
 		  </ul>
 		</div>
-		
-		<script type="text/javascript">
-	    function check_date(){
-	        var dateData = document.getElementById('birth_date').value
-	        if (!dateData) {/* тут будет обработка значения (dateData = null, а отправляет set birth_date = 'Invalid date')*/ 
-	        //var time = new Date(2013, 2, 8);
-	        document.getElementById("message").innerHTML = "Please, enter date of birth";
-	        // пытался сделать dateData = time прото присвоить другое значение, но value не меняется
-	        //alert(document.getElementById('birth_date').value);
-	        return false;
-	        }
-	    }
-	    </script>
 	</body>
 </html>

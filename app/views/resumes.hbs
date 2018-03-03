@@ -1,23 +1,546 @@
+<!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8" />
+        <link rel="shortcut icon" href="http://s1.iconbird.com/ico/2013/9/452/w512h5121380477054shop.png" type="image/x-icon">
+        <title>Resumes</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+		<style>
+		@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+            * { -webkit-box-sizing:border-box; 
+            -moz-box-sizing:border-box; 
+            -ms-box-sizing:border-box; 
+            -o-box-sizing:border-box; 
+            }
+            
+            .about {
+                position:fixed;
+                bottom:10px;
+                text-align: center;
+                width: 100%;
+                color: #fff; 
+                text-shadow: 0 0 10px rgba(0,0,0,0.3); 
+                letter-spacing:1px;
+            }
+            
+            h1 {
+                color: #fff; 
+                text-shadow: 0 0 10px rgba(0,0,0,0.3); 
+                letter-spacing:1px; 
+                text-align:center; 
+            }
+           
+            input { 
+            	margin-bottom: 10px; 
+            	margin-left: 10px;
+            	background: rgba(0,0,0,0.3);
+            	outline: none;
+            	padding: 10px;
+            	font-size: 13px;
+            	color: #fff;
+            	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+            	border: 1px solid rgba(0,0,0,0.3);
+            	border-radius: 4px;
+            	box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+            	-webkit-transition: box-shadow .5s ease;
+            	-moz-transition: box-shadow .5s ease;
+            	-o-transition: box-shadow .5s ease;
+            	-ms-transition: box-shadow .5s ease;
+            	transition: box-shadow .5s ease;
+            }
+            
+            input:focus { 
+                box-shadow: 
+                inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); 
+                
+            }
+            
+    		body,
+    		html {
+    		    padding: 0;
+    		    overflow: hidden;
+    		    margin: 0;
+    		    width: 100%;
+            	height:100%;
+            	font-family: 'Open Sans', sans-serif;
+            	background: #092756;
+            	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
+            	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
+            	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+    		}
+    
+    		main {
+    		  z-index: 2;
+    		  position: relative;
+    		  height: 100%;
+    		  background: #092756;
+            	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
+            	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
+            	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+    		}
+    
+    		.sidebar {
+    		  height: 100%;
+    		  width: 300px;
+    		  position: fixed;
+    		  top: 0;
+    		  z-index: 1;
+    		  right: 0;
+    		  background-color: #EF8354;
+    		}
+    
+    		.bar {
+    		  display: block;
+    		  height: 5px;
+    		  width: 50px;
+    		  background-color: #EF8354;
+    		  margin: 10px auto;
+    		}
+    
+    		.button {
+    		  cursor: pointer;
+    		  display: inline-block;
+    		  width: auto;
+    		  margin: 0 auto;
+    		  -webkit-transition: all .7s ease;
+    		  -moz-transition: all .7s ease;
+    		  -ms-transition: all .7s ease;
+    		  -o-transition: all .7s ease;
+    		  transition: all .7s ease;
+    		}
+    
+    		.nav-right {
+    		  position: fixed;
+    		  right: 30px;
+    		  top: 20px;
+    		}
+    
+    		.nav-right.visible-xs {
+    		  z-index: 3;
+    		}
+    
+    		.hidden-xs {
+    		  display: none;
+    		}
+    
+    		.middle {
+    		  margin: 0 auto;
+    		}
+    
+    		.bar {
+    		  -webkit-transition: all .7s ease;
+    		  -moz-transition: all .7s ease;
+    		  -ms-transition: all .7s ease;
+    		  -o-transition: all .7s ease;
+    		  transition: all .7s ease;
+    		}
+    
+    		.nav-right.visible-xs .active .bar {
+    		  background-color: #FFF;
+    		  -webkit-transition: all .7s ease;
+    		  -moz-transition: all .7s ease;
+    		  -ms-transition: all .7s ease;
+    		  -o-transition: all .7s ease;
+    		  transition: all .7s ease;
+    		}
+    
+    		.button.active .top {
+    		  -webkit-transform: translateX(-300px) translateY(15px) rotateZ(45deg);
+    		  -moz-transform: translateX(-300px) translateY(15px) rotateZ(45deg);
+    		  -ms-transform: translateX(-300px) translateY(15px) rotateZ(45deg);
+    		  -o-transform: translateX(-300px) translateY(15px) rotateZ(45deg);
+    		  transform: translateX(-300px) translateY(15px) rotateZ(45deg);
+    		}
+    
+    		.button.active .bottom {
+    		  -webkit-transform: translateX(-300px) translateY(-15px) rotateZ(-45deg);
+    		  -moz-transform: translateX(-300px) translateY(-15px) rotateZ(-45deg);
+    		  -ms-transform: translateX(-300px) translateY(-15px) rotateZ(-45deg);
+    		  -o-transform: translateX(-300px) translateY(-15px) rotateZ(-45deg);
+    		  transform: translateX(-300px) translateY(-15px) rotateZ(-45deg);
+    		}
+    
+    		.button.active .middle {
+    		  width: 0;
+    		}
+    
+    		.move-to-left {
+    		  z-index: 4;
+    		}
+    		
+    		.hide-back {
+    		    background: rgba(0, 0, 0, 0.4);
+    		}
+    
+    		.sidebar-list {
+    		  padding: 0;
+    		  margin: 0;
+    		  list-style: none;
+    		  position: relative;
+    		  margin-top: 150px;
+    		  text-align: center;
+    		}
+    
+    		.sidebar-item {
+    		  margin: 30px 0;
+    		  opacity: 0;
+    		  -webkit-transform: translateY(-20px);
+    		  -moz-transform: translateY(-20px);
+    		  -ms-transform: translateY(-20px);
+    		  -o-transform: translateY(-20px);
+    		  transform: translateY(-20px);
+    		}
+    
+    		.sidebar-item:first-child {
+    		  -webkit-transition: all .7s .2s ease-in-out;
+    		  -moz-transition: all .7s .2s ease-in-out;
+    		  -ms-transition: all .7s .2s ease-in-out;
+    		  -o-transition: all .7s .2s ease-in-out;
+    		  transition: all .7s .2s ease-in-out;
+    		}
+    
+    		.sidebar-item:nth-child(2) {
+    		  -webkit-transition: all .7s .4s ease-in-out;
+    		  -moz-transition: all .7s .4s ease-in-out;
+    		  -ms-transition: all .7s .4s ease-in-out;
+    		  -o-transition: all .7s .4s ease-in-out;
+    		  transition: all .7s .4s ease-in-out;
+    		}
+    
+    		.sidebar-item:last-child {
+    		  -webkit-transition: all .7s .6s ease-in-out;
+    		  -moz-transition: all .7s .6s ease-in-out;
+    		  -ms-transition: all .7s .6s ease-in-out;
+    		  -o-transition: all .7s .6s ease-in-out;
+    		  transition: all .7s .6s ease-in-out;
+    		}
+    
+    		.sidebar-item.active {
+    		  opacity: 1;
+    		  -webkit-transform: translateY(0px);
+    		  -moz-transform: translateY(0px);
+    		  -ms-transform: translateY(0px);
+    		  -o-transform: translateY(0px);
+    		  transform: translateY(0px);
+    		}
+    
+    		.sidebar-anchor {
+    		  color: #FFF;
+    		  text-decoration: none;
+    		  font-size: 1.8em;
+    		  text-transform: uppercase;
+    		  position: relative;
+    		  padding-bottom: 7px;
+    		}
+    
+    		.sidebar-anchor:before {
+    		  content: "";
+    		  width: 0;
+    		  height: 2px;
+    		  position: absolute;
+    		  bottom: 0;
+    		  left: 0;
+    		  background-color: #FFF;
+    		  -webkit-transition: all .7s ease-in-out;
+    		  -moz-transition: all .7s ease-in-out;
+    		  -ms-transition: all .7s ease-in-out;
+    		  -o-transition: all .7s ease-in-out;
+    		  transition: all .7s ease-in-out;
+    		}
+    
+    		.sidebar-anchor:hover:before {
+    		  width: 100%;
+    		}
+    
+    
+    		@media (min-width: 480px) {
+    		  .nav-list {
+    			display: block;
+    		  }
+    		}
+    
+    		@media (min-width: 768px) {
+    		  .nav-right {
+    			position: absolute;
+    		  }
+    		  .hidden-xs {
+    			display: block;
+    		  }
+    		  .visible-xs {
+    			display: none;
+    		  }
+    		}
+    		
+		</style>
+		<style>
+		
+		#pen-title,
+		#pen-description {
+			position: fixed;
+			top: 40%;
+			left: 50%;
+			z-index: 0;
+			color: #484848;
+		}
+		
+		
+		::-webkit-scrollbar {
+		visibility: hidden;
+		width: 0px;
+		}
+		
+		
+		#pen-title {
+			transform: translate(-50%, -125%);
+			font-size: 2rem;
+			text-transform: uppercase;
+		}
+		
+		#pen-description {
+			transform: translate(-50%, 125%);
+			font-size: 1.125rem;
+		}
+		
+		
+		.card-checkbox { display: none; }
+		
+		
+		.card {
+			width: 50%;
+			height: 50%;
+			box-sizing: border-box;
+			position: fixed;
+			top: 85%;
+			left: 25%;
+			padding-left: 5%;
+			transform: rotate(-2deg);
+			z-index: 0;
+			background-color: #ddd;
+			color: #181818;
+			box-shadow: 0 0 16px rgba(0,0,0,.25);
+			transition: all .75s;
+		}
+		
+		.card-checkbox:first-of-type + .card {
+			transform: rotate(2deg);
+			z-index: 2;
+			background-color: #fff;
+		}
+		
+		.card-checkbox:nth-of-type(2) + .card {
+			z-index: 1;
+			transform: rotate(0);
+			background-color: #eee;
+		}
+		
+		
+		.card-checkbox:checked + .card {
+			transform: rotate(0);
+			top: 20%;
+			background-color: #fff;
+		}
+		
+		
+		.card-checkbox:first-of-type:checked ~ .card-checkbox:nth-of-type(2) + .card {
+				transform: rotate(2deg);
+			z-index: 2;
+			background-color: #fff;
+		}
+		
+		.card-checkbox:first-of-type:checked ~ .card-checkbox:nth-of-type(3) + .card {
+		z-index: 1;
+			transform: rotate(0);
+			background-color: #eee;
+		}
+		
+		.card-checkbox:nth-of-type(2):checked ~ .card-checkbox:nth-of-type(3) + .card {
+			z-index: 1;
+			transform: rotate(0);
+			background-color: #eee;
+		}
+		
+		
+		#nav {
+			display: flex;
+			padding-left: 0;
+			list-style: none;
+			font-size: .95rem;
+			color: #686868;
+			height: 80%;
+		}
+		
+		label {
+			display: block;
+			padding: .75rem 1.25rem;
+			cursor: pointer;
+			transition: color .25s;
+		}
+		
+		label:hover {
+			color: #f8f8f8;
+		}
+			
+			
+		.box {
+			width: 70%;
+			height: 100%;
+		    margin: auto;
+		    overflow: hidden;
+		}
+		
+		.card-inner {
+			height: 95%;
+			width: 95%;
+		}
+		
+		.card-inner div:last-child {
+			width: 65%;
+			height: 80%;
+		    margin-right: 0;
+		    padding-left: 10%;
+		    margin-top: 70px;
+		}
+		.card-inner div {
+			overflow: auto;
+			height: 100%;
+			width: 30%;
+			float: left;
+			display:inline-block;
+		}
+		
+		.box-scroll {
+			width: 100%;
+			height: 100%;
+			margin-left: auto;
+    		margin-right: auto;
+			overflow: auto;
+		}
+		
+		.lowercase {
+			color: #EF8354;
+		}
+		
+		.img {
+			width: 100%;
+		}
+		
+		b {
+			color: #EF8354;
+			margin-bottom: 5px;
+		}
+		
+		</style>
+		<script>
+			$(document).ready(function() {
+
+			  function toggleSidebar() {
+				$(".button").toggleClass("active");
+				$(".sidebar").toggleClass("move-to-left");
+				$(".sidebar-item").toggleClass("active");
+				$("main").toggleClass("hide-back");
+			  }
+
+			  $(".button").on("click tap", function() {
+				toggleSidebar();
+			  });
+
+			  $(document).keyup(function(e) {
+				if (e.keyCode === 27) {
+				  toggleSidebar();
+				}
+			  });
+
+			});
+			
+			$(document).ready(function() {
+				if (document.getElementById("hidden-id").value == "#")
+				{
+					document.getElementById("sidebar-list").innerHTML = "<li class='sidebar-item'><a href='./' class='sidebar-anchor'>Главная</a></li><li class='sidebar-item'><a href='./signin' class='sidebar-anchor'>Вход</a></li><li class='sidebar-item'><a href='./signup' class='sidebar-anchor'>Регистрация</a></li>";
+				}
+				
+				$('.fng').replaceWith("<b>График работы:</b>&nbsp&nbsp&nbspПолный день<br><br>");
+				$('.gng').replaceWith("<b>График работы:</b>&nbsp&nbsp&nbspГибкий график<br><br>");
+				$('.ung').replaceWith("<b>График работы:</b>&nbsp&nbsp&nbspУдаленная работа<br><br>");
+				$('.ng').replaceWith("<b>График работы:</b>&nbsp&nbsp&nbspне указано<br><br>");
+				$('.ns').replaceWith("<b>Сфера:</b>&nbsp&nbsp&nbspне указано");
+			$('.nz').replaceWith("<b>Заработная плата:</b>&nbsp&nbsp&nbspне указано");
+			$('.np').replaceWith("<b>Должность:</b>&nbsp&nbsp&nbspне указано");
+			$('.nc').replaceWith("<b>Город:</b>&nbsp&nbsp&nbspне указано");
+			
+				
+			});
+		</script>
 	</head>
-	
-		<body>
-		<table>
-				<thead>
-			<tr>			
-				<th>Firstname</th>
-				<th>Lastname</th>
-			</tr>
-			</thead>
-			<tbody>
-				{{#each result}}
-					<tr onclick="window.location.href='./user?id={{this.id}}'">
-						<td>{{this.firstname}}</td>
-						<td>{{this.lastname}}</td>
-					</tr></br>
-				{{/each}}
-			</tbody>  		
-		</table>
-		</body>  	
+	<body>
+		<div class="nav-right visible-xs">
+		  <div class="button" id="btn">
+			<div class="bar top"></div>
+			<div class="bar middle"></div>
+			<div class="bar bottom"></div>
+		  </div>
+		</div>
+		<main>
+		    <nav>
+				<div class="nav-right hidden-xs">
+				  <div class="button" id="btn">
+					<div class="bar top"></div>
+					<div class="bar middle"></div>
+					<div class="bar bottom"></div>
+				  </div>
+				</div>
+		    </nav>
+		    
+			<div class="box">
+				<div class="box-scroll"> 
+				    <ul id="nav">
+						<li class="lowercase"><label for="put-cards-down">ОЧИСТИТЬ</label></li>
+						{{#each result}}
+						<li><label for="{{this.id}}">{{this.firstname}}</label></li>
+			 			{{/each}}
+					</ul>
+			 	</div>
+			</div>
+			
+			<input type = "hidden" id="hidden-id" value="#{{user.id}}">
+			<h1 id="pen-title">Доска объявлений</h1>
+			<div id="pen-description">(Требует больших размеров окна)</div>
+			
+			{{#each result}}
+			<input type="radio" name="cards" class="card-checkbox" id="{{this.id}}">
+			<div class="card">
+					<div class="card-inner">
+						
+				    	<div>
+				    		<h2>Профиль</h2>
+				    		<input id="img-gender" type="hidden" value="{{this.gender}}"/>
+							<img src="https://s3.us-east-2.amazonaws.com/elasticbeanstalk-us-east-2-424332706355/img_avatar_{{this.gender}}.png" id="image" class="img"/>
+				    		<h3>{{this.firstname}} {{this.lastname}}</h3>
+				    	</div>
+				    	<div class="info">
+				    		<b class='{{this.sphere}}ns'>Сфера:</b>&nbsp&nbsp&nbsp{{this.sphere}}<br><br>
+				    		<b class='{{this.payment}}nz'>Заработная плата:</b>&nbsp&nbsp&nbsp{{this.payment}}<br><br>
+				    		<b class='{{this.citizenship}}nc'>Город:</b>&nbsp&nbsp&nbsp{{this.citizenship}}<br><br>
+				    		<b class='{{this.graphic}}ng'></b>
+							<b class='{{this.posit}}np'>Должность:</b>&nbsp&nbsp&nbsp{{this.posit}}<br><br>
+							<a href='./user?id={{this.id}}'>Подробнее...</a>
+				    	</div>
+				  	</div>
+			</div>
+			{{/each}}
+			<input type="radio" name="cards" class="card-checkbox" id="put-cards-down">
+		
+		</main>
+		<div class="sidebar">
+		  <ul class="sidebar-list" id="sidebar-list">
+			<li class='sidebar-item'><a href='./dashboard' class='sidebar-anchor'>Профиль</a></li>
+			<li class='sidebar-item'><a href='./' class='sidebar-anchor'>Главная</a></li>
+			<li class='sidebar-item'><a href='./logout' class='sidebar-anchor'>Выход</a></li></ul>
+		</div>
+	</body>
 </html>

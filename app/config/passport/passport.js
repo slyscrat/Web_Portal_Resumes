@@ -20,7 +20,7 @@ module.exports = function(passport, user, done){
                 }
             }).then(function(user){
                 if(user){
-                    req.session.message = 'That email is taken';
+                    req.session.message = 'Электронная почта уже используется';
                     req.session.messages = [];
                     return done(null, false);
                 } else {
@@ -64,13 +64,13 @@ module.exports = function(passport, user, done){
                 }
             }).then(function(user){
                 if (!user){
-                    req.session.message = 'Incorrect email';
+                    req.session.message = 'Неверный адрес электронной почты';
                     req.session.messages = [];
                     return done(null, false);
                 }
 
                 if (!isValidPassword(user.password, password)){
-                    req.session.message = 'Incorrect password';
+                    req.session.message = 'Неверный пароль';
                     req.session.messages = [];
                     return done(null, false);
                 }
@@ -79,7 +79,7 @@ module.exports = function(passport, user, done){
                 return done(null, userinfo)
             }).catch(function(err){
                 console.log("Error", err);
-                req.session.message = 'Error occurred while signin. Please, try again';
+                req.session.message = 'Возникла ошибка во время авторизации. Пожайлуйста, повторите попытку позже';
                 req.session.messages = [];
                 return done(null, false);
             });

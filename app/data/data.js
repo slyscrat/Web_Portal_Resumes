@@ -8,7 +8,7 @@ module.exports.update = function(req, user, next){
                 }
             }).then(function(user){
                 if (!user){
-                    req.session.message = "User doesn't exist";
+                    req.session.message = "Пользователь не существует";
                     req.session.messages = [];
                     return next();
                 }
@@ -22,15 +22,26 @@ module.exports.update = function(req, user, next){
                     gender: req.body.gender,
                     business_trip: req.body.business_trip,
                     citizenship: req.body.citizenship,
-                    phone_number: req.body.phone_number
+                    phone_number: req.body.phone_number,
+                    posit: req.body.posit,
+                    sphere: req.body.sphere,
+                    skills: req.body.skills,
+                    specialist_year: req.body.specialist_year,
+                    foreign_languages: req.body.foreign_languages,
+                    payment: req.body.payment,
+                    employment: req.body.employment,
+                    graphic: req.body.graphic,
+                    organization: req.body.organization,
+                    posit_was: req.body.posit_was,
+                    duty_achieves: req.body.duty_achieves
                 }).then(function(){
-                    req.session.message = 'Updated succesfully';
+                    req.session.message = 'Успешно обновлено';
                     req.session.messages = [];
                     req.user = user;
                     return next();
                 }).catch(function(err){
                     console.log("Error", err);
-                    req.session.message = 'Error occurred while updating. Please, try again';
+                    req.session.message = 'Во время обновления возникли ошибки. Пожалуйста, повторите попытку позже';
                     req.session.messages = [];
                     return next();
             })
@@ -45,9 +56,9 @@ module.exports.select = function(req, res, callback){
         }
     }).then(function(user){
         if (!user){
-            req.session.message = "User with id = " + req.query.id +" doesn't exist";
+            req.session.message = "Пользователь с id = " + req.query.id +" не существует";
             req.session.messages = [];
-            console.log("User not found");
+            console.log("Пользователь не найден");
             res.redirect("./error");
             return;
         }
@@ -58,12 +69,12 @@ module.exports.select = function(req, res, callback){
 
 module.exports.all = function(req, res, callback){
     User.findAll({
-        attributes: ['id', 'firstname', 'lastname', 'sphere', 'payment']
+        attributes: ['id', 'firstname', 'lastname', 'sphere', 'payment', 'citizenship', 'graphic', 'posit', 'gender']
     }).then(function(resumes){
         if (!resumes){
-            req.session.message = "No any users";
+            req.session.message = "Нет пользователей";
             req.session.messages = [];
-            console.log("No any users");
+            console.log("Нет пользователей");
             res.redirect("./");
             return;    
         }

@@ -1,11 +1,424 @@
+<!DOCTYPE html>
 <html>
-<head>
+	<head>
+		<meta charset="utf-8" />
+        <link rel="shortcut icon" href="http://s1.iconbird.com/ico/2013/9/452/w512h5121380477054shop.png" type="image/x-icon">
+        <title>YES - yummy employee shop</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+		<style>
+		@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+            * { -webkit-box-sizing:border-box; 
+            -moz-box-sizing:border-box; 
+            -ms-box-sizing:border-box; 
+            -o-box-sizing:border-box; 
+            box-sizing:border-box; 
+                
+            }
+            
+            ::-webkit-scrollbar {
+                width: 0px;  /* remove scrollbar space */
+                background: transparent;  /* optional: just make scrollbar invisible */
+            }
+        
+            .about {
+                position:fixed;
+                bottom:10px;
+                text-align: center;
+                width: 100%;
+                color: #fff; 
+                text-shadow: 0 0 10px rgba(0,0,0,0.3); 
+                letter-spacing:1px;
+            }
+            
+            .userInfo {
+                border: 1px solid rgba(0,0,0,0.3);
+            	border-radius: 20px;
+            	margin: auto;
+            	margin-top: 5%;
+            	padding: 0px 30px 10px 30px;
+            	height: 60%;
+            	width:700px;
+            	overflow:auto;
+            }
+            
+            h1 {
+                color: #fff; 
+                text-shadow: 0 0 10px rgba(0,0,0,0.3); 
+                letter-spacing:1px; 
+                text-align:center; 
+            }
+            h3 {
+                color: #fff; 
+                text-shadow: 0 0 10px rgba(0,0,0,0.3); 
+                letter-spacing:1px; 
+            }
+           
+            input { 
+            	margin-bottom: 10px; 
+            	margin-left: 10px;
+            	background: rgba(0,0,0,0.3);
+            	outline: none;
+            	padding: 10px;
+            	font-size: 13px;
+            	color: #fff;
+            	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+            	border: 1px solid rgba(0,0,0,0.3);
+            	border-radius: 4px;
+            	box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+            	-webkit-transition: box-shadow .5s ease;
+            	-moz-transition: box-shadow .5s ease;
+            	-o-transition: box-shadow .5s ease;
+            	-ms-transition: box-shadow .5s ease;
+            	transition: box-shadow .5s ease;
+            }
+            
+            input:focus { 
+                box-shadow: 
+                inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); 
+                
+            }
+            
+    		body,
+    		html {
+    		    padding: 0;
+    		    margin: 0;
+    		    width: 100%;
+            	height:100%;
+            	font-family: 'Open Sans', sans-serif;
+            	background: #092756;
+            	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
+            	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
+            	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+    		}
+    
+    		main {
+    		  z-index: 2;
+    		  position: relative;
+    		  height: 100%;
+    		  background: #092756;
+            	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
+            	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+            	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
+            	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+    		}
+    
+    		.sidebar {
+    		  height: 100%;
+    		  width: 300px;
+    		  position: fixed;
+    		  top: 0;
+    		  z-index: 1;
+    		  right: 0;
+    		  background-color: #EF8354;
+    		}
+    
+    		.bar {
+    		  display: block;
+    		  height: 5px;
+    		  width: 50px;
+    		  background-color: #EF8354;
+    		  margin: 10px auto;
+    		}
+    
+    		.button {
+    		  cursor: pointer;
+    		  display: inline-block;
+    		  width: auto;
+    		  margin: 0 auto;
+    		  -webkit-transition: all .7s ease;
+    		  -moz-transition: all .7s ease;
+    		  -ms-transition: all .7s ease;
+    		  -o-transition: all .7s ease;
+    		  transition: all .7s ease;
+    		}
+    
+    		.nav-right {
+    		  position: fixed;
+    		  right: 30px;
+    		  top: 20px;
+    		}
+    
+    		.nav-right.visible-xs {
+    		  z-index: 3;
+    		}
+    
+    		.hidden-xs {
+    		  display: none;
+    		}
+    
+    		.middle {
+    		  margin: 0 auto;
+    		}
+    
+    		.bar {
+    		  -webkit-transition: all .7s ease;
+    		  -moz-transition: all .7s ease;
+    		  -ms-transition: all .7s ease;
+    		  -o-transition: all .7s ease;
+    		  transition: all .7s ease;
+    		}
+    
+    		.nav-right.visible-xs .active .bar {
+    		  background-color: #FFF;
+    		  -webkit-transition: all .7s ease;
+    		  -moz-transition: all .7s ease;
+    		  -ms-transition: all .7s ease;
+    		  -o-transition: all .7s ease;
+    		  transition: all .7s ease;
+    		}
+    
+    		.button.active .top {
+    		  -webkit-transform: translateX(-300px) translateY(15px) rotateZ(45deg);
+    		  -moz-transform: translateX(-300px) translateY(15px) rotateZ(45deg);
+    		  -ms-transform: translateX(-300px) translateY(15px) rotateZ(45deg);
+    		  -o-transform: translateX(-300px) translateY(15px) rotateZ(45deg);
+    		  transform: translateX(-300px) translateY(15px) rotateZ(45deg);
+    		}
+    
+    		.button.active .bottom {
+    		  -webkit-transform: translateX(-300px) translateY(-15px) rotateZ(-45deg);
+    		  -moz-transform: translateX(-300px) translateY(-15px) rotateZ(-45deg);
+    		  -ms-transform: translateX(-300px) translateY(-15px) rotateZ(-45deg);
+    		  -o-transform: translateX(-300px) translateY(-15px) rotateZ(-45deg);
+    		  transform: translateX(-300px) translateY(-15px) rotateZ(-45deg);
+    		}
+    
+    		.button.active .middle {
+    		  width: 0;
+    		}
+    
+    		.move-to-left {
+    		  z-index: 4;
+    		}
+    		
+    		.hide-back {
+    		    background: rgba(0, 0, 0, 0.4);
+    		}
+    
+    		nav {
+    		  padding-top: 30px;
+    		}
+    
+    		.sidebar-list {
+    		  padding: 0;
+    		  margin: 0;
+    		  list-style: none;
+    		  position: relative;
+    		  margin-top: 150px;
+    		  text-align: center;
+    		}
+    
+    		.sidebar-item {
+    		  margin: 30px 0;
+    		  opacity: 0;
+    		  -webkit-transform: translateY(-20px);
+    		  -moz-transform: translateY(-20px);
+    		  -ms-transform: translateY(-20px);
+    		  -o-transform: translateY(-20px);
+    		  transform: translateY(-20px);
+    		}
+    
+    		.sidebar-item:first-child {
+    		  -webkit-transition: all .7s .2s ease-in-out;
+    		  -moz-transition: all .7s .2s ease-in-out;
+    		  -ms-transition: all .7s .2s ease-in-out;
+    		  -o-transition: all .7s .2s ease-in-out;
+    		  transition: all .7s .2s ease-in-out;
+    		}
+    
+    		.sidebar-item:nth-child(2) {
+    		  -webkit-transition: all .7s .4s ease-in-out;
+    		  -moz-transition: all .7s .4s ease-in-out;
+    		  -ms-transition: all .7s .4s ease-in-out;
+    		  -o-transition: all .7s .4s ease-in-out;
+    		  transition: all .7s .4s ease-in-out;
+    		}
+    
+    		.sidebar-item:last-child {
+    		  -webkit-transition: all .7s .6s ease-in-out;
+    		  -moz-transition: all .7s .6s ease-in-out;
+    		  -ms-transition: all .7s .6s ease-in-out;
+    		  -o-transition: all .7s .6s ease-in-out;
+    		  transition: all .7s .6s ease-in-out;
+    		}
+    
+    		.sidebar-item.active {
+    		  opacity: 1;
+    		  -webkit-transform: translateY(0px);
+    		  -moz-transform: translateY(0px);
+    		  -ms-transform: translateY(0px);
+    		  -o-transform: translateY(0px);
+    		  transform: translateY(0px);
+    		}
+    
+    		.sidebar-anchor {
+    		  color: #FFF;
+    		  text-decoration: none;
+    		  font-size: 1.8em;
+    		  text-transform: uppercase;
+    		  position: relative;
+    		  padding-bottom: 7px;
+    		}
+    
+    		.sidebar-anchor:before {
+    		  content: "";
+    		  width: 0;
+    		  height: 2px;
+    		  position: absolute;
+    		  bottom: 0;
+    		  left: 0;
+    		  background-color: #FFF;
+    		  -webkit-transition: all .7s ease-in-out;
+    		  -moz-transition: all .7s ease-in-out;
+    		  -ms-transition: all .7s ease-in-out;
+    		  -o-transition: all .7s ease-in-out;
+    		  transition: all .7s ease-in-out;
+    		}
+    
+    		.sidebar-anchor:hover:before {
+    		  width: 100%;
+    		}
+    
+    
+    		@media (min-width: 480px) {
+    		  .nav-list {
+    			display: block;
+    		  }
+    		}
+    
+    		@media (min-width: 768px) {
+    		  .nav-right {
+    			position: absolute;
+    		  }
+    		  .hidden-xs {
+    			display: block;
+    		  }
+    		  .visible-xs {
+    			display: none;
+    		  }
+    		}
+    		
+    		.img {
+    		    width: 100px;
+    		}
+		</style>
+		<script>
+			$(document).ready(function() {
 
-</head>
+			  function toggleSidebar() {
+				$(".button").toggleClass("active");
+				$(".sidebar").toggleClass("move-to-left");
+				$(".sidebar-item").toggleClass("active");
+				$("main").toggleClass("hide-back");
+			  }
 
-<body>
-    <input type = "text" value="{{user.id}}">
-    <input type = "text" value="{{result.firstname}}"></br></br>
-    <input type = "button" value="Go back to resumes" onclick="location.href='./resumes'">
-</body>
+			  $(".button").on("click tap", function() {
+				toggleSidebar();
+			  });
+
+			  $(document).keyup(function(e) {
+				if (e.keyCode === 27) {
+				  toggleSidebar();
+				}
+			  });
+
+			});
+			
+			$(document).ready(function() {
+				if (document.getElementById("hidden-id").value == "#")
+				{
+					document.getElementById("sidebar-list").innerHTML = "<li class='sidebar-item'><a href='./resumes' class='sidebar-anchor'>Резюме</a></li><li class='sidebar-item'><a href='./signin' class='sidebar-anchor'>Вход</a></li><li class='sidebar-item'><a href='./signup' class='sidebar-anchor'>Регистрация</a></li>";
+				}
+			});
+		</script>
+		<script>
+    		$(document).ready(function() {
+				if (document.getElementById("hidden-id").value == "#")
+				{
+					document.getElementById("sidebar-list").innerHTML = "<li class='sidebar-item'><a href='./' class='sidebar-anchor'>Главная</a></li><li class='sidebar-item'><a href='./signin' class='sidebar-anchor'>Вход</a></li><li class='sidebar-item'><a href='./signup' class='sidebar-anchor'>Регистрация</a></li>";
+				}
+    				
+				$('.n').replaceWith("");
+			});
+			function go(){
+            if ("{{result.gender}}".charAt(0) == 'f') { document.getElementById("gender").innerHTML = "Пол: Женский"}
+            else if ("{{result.gender}}".charAt(0) == 'm') { document.getElementById("gender").innerHTML = "Пол: Мужской"};
+
+            if ("{{result.business_trip}}".charAt(0) == 'a') {document.getElementById("business").innerHTML = "Готовность к командировкам: Всегда"}
+            else if ("{{result.business_trip}}".charAt(0) == 's') {document.getElementById("business").innerHTML = "Готовность к командировкам: Иногда"}
+            else if ("{{result.business_trip}}".charAt(0) == 'n') {document.getElementById("business").innerHTML = "Готовность к командировкам: Никогда"};
+        
+			if ("{{result.graphic}}".charAt(0) == 'f') {document.getElementById("graphic").innerHTML = "График работы: Полный день"}
+            else if ("{{result.graphic}}".charAt(0) == 'g') {document.getElementById("graphic").innerHTML = "График работы: Гибкий график"}
+            else if ("{{result.graphic}}".charAt(0) == 'u') {document.getElementById("graphic").innerHTML = "График работы: Удаленная работа"};
+ 
+            if ("{{result.employment}}".charAt(0) == 'f') { document.getElementById("employment").innerHTML = "Занятость: Полная"}
+            else if ("{{result.employment}}".charAt(0) == 'p') { document.getElementById("employment").innerHTML = "Занятость: Частичная"};
+
+			}
+        </script>
+	</head>
+	<body onload="go()">
+		<div class="nav-right visible-xs">
+		  <div class="button" id="btn">
+			<div class="bar top"></div>
+			<div class="bar middle"></div>
+			<div class="bar bottom"></div>
+		  </div>
+		</div>
+		<main>
+            <nav>
+                <div class="nav-right hidden-xs">
+                    <div class="button" id="btn">
+                        <div class="bar top"></div>
+                        <div class="bar middle"></div>
+                        <div class="bar bottom"></div>
+                    </div>
+                </div>
+            </nav>
+            
+            <h1>{{result.firstname}} {{result.lastname}}</h1>
+            <input type = "hidden" id="hidden-id" value="#{{user.id}}">
+            <div class="userInfo">
+		        <h3 style="color: #EF8354">Личная информация</h3>
+                <h3>Отчество: {{result.patronymic}}</h3>
+                <h3>Дата рождения: {{result.birth_date}}</h3>
+                <h3 id="gender">Пол: </h3>
+                <h3>Город: {{result.citizenship}}</h3>
+                <h3 style="color: #EF8354">Контактные данные</h3>
+                <h3>Почта: {{result.email}}</h3>
+                <h3 class="n{{result.site}}">Сайт: {{result.site}}</h3>
+                <h3>Контактный телефон: {{result.phone_number}}</h3>
+                <h3 style="color: #EF8354">Условия работы</h3>
+                <h3>Должность: {{result.posit}}</h3>
+                <h3 id="business">Готовность к командировкам: </h3>
+                <h3>Заработная плата: {{result.payment}}</h3>
+                <h3 id="graphic">График работы: </h3>
+                <h3 id="employment">Занятость: </h3>
+                <h3 style="color: #EF8354">Умения и достижения</h3>
+                <h3>Сфера работы: {{result.sphere}}</h3>
+                <h3>Стаж работы (лет): {{result.specialist_year}}</h3>
+                <h3>Навыки: {{result.skills}}</h3>
+                <h3>Иностранные языки: {{result.foreign_languages}}</h3>
+                <h3>Организация: {{result.organization}}</h3>
+                <h3>Предыдущая должность: {{result.posit_was}}</h3>
+                <h3>Достижения: {{result.duty_achieves}}</h3>
+			</div>
+            <div class=about>
+            © Бутышкис Илья и Ершов Роман, Санкт-Петербург, 2018
+            </div>
+		</main>
+		<div class="sidebar">
+		  <ul class="sidebar-list" id="sidebar-list">
+			<li class='sidebar-item'><a href='./dashboard' class='sidebar-anchor'>Профиль</a></li>
+			<li class='sidebar-item'><a href='./resumes' class='sidebar-anchor'>Резюме</a></li>
+			<li class='sidebar-item'><a href='./logout' class='sidebar-anchor'>Выход</a></li>
+		  </ul>
+		</div>
+	</body>
 </html>

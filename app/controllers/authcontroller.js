@@ -25,6 +25,7 @@ exports.user = function(req, res){
 }
 exports.error = function(req, res){
     res.render('error', {error: req.session.message});
+    clean_log(req)
 }
 exports.logout = function(req, res) {
     req.session.destroy(function(err) {

@@ -41,13 +41,13 @@
                         <form id="signin" name="signin" method="post" action="signin" align="center">
                            
                             <input class="text" name="email" type="text"
-                             value={this.state.email} placeholder="Email address"
+                             value={this.state.email} placeholder="Почта"
                              onChange={this.onEmailChange} /><br/>
                             
                             <input name="password" type="password"
-                             value={this.state.password} placeholder="Password"
+                             value={this.state.password} placeholder="Пароль"
                              onChange={this.onPasswordChange} /><br/>
-                            <input class="btn" type="submit" value="Sign In"/>
+                            <input class="btn" type="submit" value="Вход"/>
                          </form>
                      );
             }
@@ -130,21 +130,20 @@
         </head>
     <body>
         <div class="userForm">
-            
             <div align="center" class="signin">
-                <h1>Sign-In</h1>
+                <h1>Вход</h1>
                 <div align="center" style="color: #EF8354" class="errors">
                     <p id="message">{{signin_error}}</p>
                 </div>
                 <div id="root" align="center" class="form"></div>
             </div>
             <div align="center" class="registration">
-                <h1>There is still no account? </h1>
-                <input type="button" value="Registration" onclick='location.href="./signup"'/>
+                <h1>До сих пор нет аккаунта? </h1>
+                <input type="button" value="Зарегистрироваться" onclick='location.href="./signup"'/>
             </div>
         </div>
         <div class=about>
             © Copyright by Ilya Butyshkis and Roman Ershov, Saint Petersburg, 2018
         </div>
-     </body>
+    </body>
 </html>

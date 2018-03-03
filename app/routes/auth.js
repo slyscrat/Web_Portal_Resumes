@@ -27,6 +27,13 @@ module.exports = function(app, passport){
     app.post('/dashboard', isLoggedIn, dataAction.update, authController.dashboard);
     app.get('/user', function(req, res, next){
             Action = dataAction.select;
+            if (req.query.id == "" || Number.isNaN(+req.query.id)) {
+                req.session.message = "Пользователь с id = " + req.query.id +" не существует";
+                req.session.messages = [];
+                console.log("Пользователь не найден");
+                res.redirect("./error");
+                return;
+            }
             Nice(req, res, function(result){
                 req.result = result;
                 return next();
