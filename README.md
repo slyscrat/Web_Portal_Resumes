@@ -7,6 +7,8 @@ This is a web site which helps employees easily find job by sharing their resume
 * [Node.js](http://nodejs.org) - Run-time environment - *version 6.x*
 * [PostgreSQL](https://www.postgresql.org/) - Database - *version 9.6.5*
 
+## Deploying
+
 ### Installing:
 
 Download this project and install **built with** soft.
@@ -37,7 +39,7 @@ Change database connection config (*app/config/config.json* ):
 "port": "5432", 		// by default in PostgreSQL
 ...
 ```  
-## Running application
+### Running application
 
 To run your site enter next command in project path:
 
