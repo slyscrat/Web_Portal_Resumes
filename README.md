@@ -6,7 +6,6 @@ This is a web site which helps employees easily find job by sharing their resume
 
 * [Node.js](http://nodejs.org) - Run-time environment that executes server-side code
 * [PostgreSQL](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ### Installing:
 
@@ -25,6 +24,7 @@ npm install express-session
 npm install bcrypt-nodejs
 npm install express-handlebars 
 npm install dotenv
+npm install react
 ```
 Change database connection config (*app/config/config.json* ) on yours:
 
