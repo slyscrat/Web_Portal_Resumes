@@ -9,7 +9,7 @@ This is a web site which helps employees easily find job by sharing their resume
 
 ## Deploying
 
-### Installing:
+### Installing
 
 Download this project and install **built with** soft.
 
