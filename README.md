@@ -9,7 +9,7 @@ Install Node and NPM
 Install PostgreSQL 9.x.x
 
 Run next commands:
-    </br>npm install express
+    	<p style="margin-left: 40px">npm install express</p>
 	</br>npm install sequelize 
 	</br>npm install pg@6.4.1 
 	</br>npm install passport
@@ -21,11 +21,11 @@ Run next commands:
 	</br>npm install dotenv
 
 Change database connection config (app/config/config.json) on yours:
-    username,
-    password,
-    database,
-    host ("localhost" if you work locally),
-    port (5432 by default)
+    </br>username,
+    </br>password,
+    </br>database,
+    </br>host ("localhost" if you work locally),
+    </br>port (5432 by default)
     
 --------------------------------------------------------------------------------------------------
 QUICK START
@@ -37,8 +37,8 @@ If everything fine you will see 'Site is alive'(Node message) and 'Nice'(Databas
 STILL HAS QUESTIONS?
 
 Contact information:
-    email: ilyabut99@gmail.com
-           roman.ershov.1998@mail.ru
-    github: github.com/slyscrat
+    </br>email: ilyabut99@gmail.com
+           </br>roman.ershov.1998@mail.ru
+    </br>github: github.com/slyscrat
 --------------------------------------------------------------------------------------------------
 @ 2018 Butyshkis Ilya and Ershov Roman. All rights reserved
