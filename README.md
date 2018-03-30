@@ -27,6 +27,7 @@ npm install bcrypt-nodejs
 npm install express-handlebars 
 npm install dotenv
 npm install react
+npm install react-dom
 ```
 Change database connection config (*app/config/config.json* ):
 
