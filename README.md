@@ -56,12 +56,12 @@ and  database message:
 ```
 Nice!
 ```
-in node cmd.
+in command line.
 
 ## Authors
 
-* **Butyshkis Ilya** - *Back-end and documentation work* - [PurpleBooth](https://github.com/slyscrat)
-* **Ershov Roman** - *Front-end work* - 
+* **Butyshkis Ilya** - *Back-end and documentation work* - [GitHub account](https://github.com/slyscrat)
+* **Ershov Roman** - *Front-end work*
     
 ## License
 
