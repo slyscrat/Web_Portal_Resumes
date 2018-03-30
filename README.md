@@ -39,9 +39,9 @@ Change database connection config (*app/config/config.json* ):
 "port": "5432", 		// by default in PostgreSQL
 ...
 ```  
-### Running application
+### Running
 
-To run your site enter next command in project path:
+To run your application enter next command in project path:
 
 ```
 npm start
