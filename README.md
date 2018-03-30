@@ -4,8 +4,8 @@ This is a web site which helps employees easily find job by sharing their resume
 
 ## Built With
 
-* [Node.js](http://nodejs.org) - Run-time environment that executes server-side code
-* [PostgreSQL](https://maven.apache.org/) - Dependency Management
+* [Node.js](http://nodejs.org) - Run-time environment - *version 6.x/7.x*
+* [PostgreSQL](https://www.postgresql.org/) - Database - *version 9.6.5*
 
 ### Installing:
 
