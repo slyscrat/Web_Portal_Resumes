@@ -49,7 +49,7 @@ If everything fine you will see node message:
 ```
 Site is alive!
 ```
-and  database meassage:
+and  database message:
 
 ```
 Nice!
