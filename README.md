@@ -4,7 +4,7 @@ This is a web site which helps employees easily find job by sharing their resume
 
 ## Built With
 
-* [Node.js](http://nodejs.org) - Run-time environment - *version 6.x/7.x*
+* [Node.js](http://nodejs.org) - Run-time environment - *version 6.x*
 * [PostgreSQL](https://www.postgresql.org/) - Database - *version 9.6.5*
 
 ### Installing:
@@ -26,7 +26,7 @@ npm install express-handlebars
 npm install dotenv
 npm install react
 ```
-Change database connection config (*app/config/config.json* ) on yours:
+Change database connection config (*app/config/config.json* ):
 
 ```
 ...
